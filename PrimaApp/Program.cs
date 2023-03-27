@@ -7,7 +7,7 @@
         //impostiamo la base delle nostra tabellina
         int baseTabellina = 2;
         //decidiamo quante volte eseguire la moltiplicazione
-        int volte = 11;
+        int volte = 10;
         
         for (int i = 0; i < volte; i++)
         {
