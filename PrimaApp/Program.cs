@@ -13,6 +13,7 @@
         {
             int risultato = i * baseTabellina;
             Console.WriteLine($"{i} * {baseTabellina} = {risultato}");
+            //Console.WriteLine(i.ToString() + " * " + baseTabellina.ToString() + " = " + risultato.ToString());
         }
     }
 }
