@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimaApp
 {
+
     internal class Utility
     {
         /// <summary>
