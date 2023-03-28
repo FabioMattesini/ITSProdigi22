@@ -8,7 +8,8 @@
         string richiesta = chiedi("Che tabellina vuoi?");
         int baseTabellina = int.Parse(richiesta);
         //decidiamo quante volte eseguire la moltiplicazione
-        int volte = 11;
+        richiesta = "Quante volte vuoi ripetere la tabellina?";
+        int volte = chiediNumero(richiesta);
         
         for (int i = 0; i < volte; i++)
         {
@@ -29,6 +30,13 @@
         Console.Write(domanda + ": ");
         //recupero dal buffer la risposta
         string risposta = Console.ReadLine();
+        return risposta;
+    }
+
+    private static int chiediNumero(string domanda)
+    {
+        Console.Write(domanda + ": ");
+        int risposta = int.Parse(Console.ReadLine());
         return risposta;
     }
 }
