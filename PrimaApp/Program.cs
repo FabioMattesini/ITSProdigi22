@@ -9,7 +9,7 @@
         int baseTabellina = int.Parse(richiesta);
         //decidiamo quante volte eseguire la moltiplicazione
         richiesta = "Quante volte vuoi ripetere la tabellina?";
-        int volte = chiediNumero(richiesta);
+        int volte = chiediNumero(richiesta) + 1;
         
         for (int i = 0; i < volte; i++)
         {
@@ -33,6 +33,11 @@
         return risposta;
     }
 
+    /// <summary>
+    /// funzione per chiedere un numero all'utente
+    /// </summary>
+    /// <param name="domanda">La domanda da porre all'utente</param>
+    /// <returns>Il numero che l'utente ha scritto in console</returns>
     private static int chiediNumero(string domanda)
     {
         Console.Write(domanda + ": ");
