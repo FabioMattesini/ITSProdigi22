@@ -24,7 +24,6 @@ internal class Program
                 {
                     int risultato = i * baseTabellina;
                     string testo = $"{i}\t*\t{baseTabellina}\t=\t{risultato}\n";
-                    Console.Write(testo);
                     File.AppendAllText(nomeFile, testo);
                 }
             }
