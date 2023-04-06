@@ -1,25 +1,38 @@
 ﻿using PrimaApp;
+using System.IO;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main(string[] args) //primo parametro sarà la base della tabellina, il secondo sarà la quantità di volte
     {
         Console.BackgroundColor = ConsoleColor.DarkBlue;
         Console.Clear();
         bool ripeti = true;
         
         while (ripeti) {
-            //impostiamo la base delle nostra tabellina
-            string richiesta = Utility.chiedi("Che tabellina vuoi?");
-            int baseTabellina = int.Parse(richiesta);
-            //decidiamo quante volte eseguire la moltiplicazione
-            richiesta = "Quante volte vuoi ripetere la tabellina?";
-            int volte = Utility.chiediNumero(richiesta) + 1;
+            int baseTabellina;
+            int volte;
+            if (args.Length == 2)
+            {
+                baseTabellina = int.Parse(args[0]);
+                volte = int.Parse(args[1]) + 1;
+            }
+            else
+            {
+                baseTabellina = Utility.chiediNumero("Che tabellina vuoi?");
+                volte = Utility.chiediNumero("Quante volte vuoi ripetere la tabellina?") + 1;
+            }
+
+            //definisco il nome del file
+            string nomeFile = $"tabellina_{baseTabellina}.txt";
+            File.WriteAllText(nomeFile, $"TABELLINA DEL {baseTabellina}\n");
 
             for (int i = 0; i < volte; i++)
             {
                 int risultato = i * baseTabellina;
-                Console.WriteLine($"{i}\t*\t{baseTabellina}\t=\t{risultato}");
+                string testo = $"{i}\t*\t{baseTabellina}\t=\t{risultato}\n";
+                Console.Write(testo);
+                File.AppendAllText(nomeFile, testo);
                 //Console.WriteLine(i.ToString() + " * " + baseTabellina.ToString() + " = " + risultato.ToString());
             }
 
@@ -28,6 +41,7 @@ internal class Program
         }
 
         Console.WriteLine("Buona giornata!");
+        //File.WriteAllText("prova.txt", "Prova", System.Text.Encoding.UTF8);
     }
 
     
