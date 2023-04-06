@@ -14,17 +14,41 @@ internal class Program
             int volte;
             if (args.Length == 2)
             {
+                ripeti = false;
                 baseTabellina = int.Parse(args[0]);
                 volte = int.Parse(args[1]) + 1;
+                string nomeFile = $"tabellina_{baseTabellina}.txt";
+                File.WriteAllText(nomeFile, $"TABELLINA DEL {baseTabellina}\n");
+
+                for (int i = 0; i < volte; i++)
+                {
+                    int risultato = i * baseTabellina;
+                    string testo = $"{i}\t*\t{baseTabellina}\t=\t{risultato}\n";
+                    Console.Write(testo);
+                    File.AppendAllText(nomeFile, testo);
+                }
             }
             else
             {
                 baseTabellina = Utility.chiediNumero("Che tabellina vuoi?");
                 volte = Utility.chiediNumero("Quante volte vuoi ripetere la tabellina?") + 1;
+                string nomeFile = $"tabellina_{baseTabellina}.txt";
+                File.WriteAllText(nomeFile, $"TABELLINA DEL {baseTabellina}\n");
+
+                for (int i = 0; i < volte; i++)
+                {
+                    int risultato = i * baseTabellina;
+                    string testo = $"{i}\t*\t{baseTabellina}\t=\t{risultato}\n";
+                    Console.Write(testo);
+                    File.AppendAllText(nomeFile, testo);
+                }
+
+                string risposta = Utility.chiedi("Vuoi un'altra tabellina? (s/n)");
+                ripeti = risposta == "s";
             }
 
             //definisco il nome del file
-            string nomeFile = $"tabellina_{baseTabellina}.txt";
+            /*string nomeFile = $"tabellina_{baseTabellina}.txt";
             File.WriteAllText(nomeFile, $"TABELLINA DEL {baseTabellina}\n");
 
             for (int i = 0; i < volte; i++)
@@ -33,11 +57,10 @@ internal class Program
                 string testo = $"{i}\t*\t{baseTabellina}\t=\t{risultato}\n";
                 Console.Write(testo);
                 File.AppendAllText(nomeFile, testo);
-                //Console.WriteLine(i.ToString() + " * " + baseTabellina.ToString() + " = " + risultato.ToString());
             }
 
             string risposta = Utility.chiedi("Vuoi un'altra tabellina? (s/n)");
-            ripeti = risposta == "s";
+            ripeti = risposta == "s";*/
         }
 
         Console.WriteLine("Buona giornata!");
