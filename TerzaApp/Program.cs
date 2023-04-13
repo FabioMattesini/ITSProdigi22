@@ -31,9 +31,12 @@
                     Scacchiera.Add(new (x, y, muro)); //da .NET 6.0 si può omettere il nome della classe
                 }
             }
-            List<Casella>? percorso = null;
+
+            //List<Casella>? percorso = null;
             //Analizza(Scacchiera, inizio, fine, percorso);
-            AnalizzaProf(Scacchiera, inizio, fine);
+
+            //soluzione prof
+            Analizza2(Scacchiera, inizio, fine);
             string migliore = soluzioni.OrderBy( x => x.Length).FirstOrDefault(); //ordino le soluzioni per lunghezza e estraggo la prima
             if(migliore != null )
             {
@@ -108,7 +111,6 @@
             {
                 soluzioni.Add(percorso);
                 Console.WriteLine("Fatto:" + percorso);
-                
             }
             else
             {
@@ -140,6 +142,35 @@
                     AnalizzaProf(scacchiera, sx, arrivo, percorso + $"[{attuale.x} {attuale.y}]");
                 }
 
+            }
+        }
+
+        private static void Analizza2(List<Casella> scacchiera, Casella da, Casella a, String percorso="") //versione ottimizzata di AnalizzaProf
+        {
+            //somportamento selettivo
+            if(da.y == a.y && da.x == a.x)
+            {
+                soluzioni.Add(percorso);
+                Console.WriteLine(percorso);
+            }
+
+            //navigazione
+            List<Casella> possibili = scacchiera.Where( //ottengo una lista di tutte le casella nelle quali mi posso muovere
+                cella => cella.muro == false &&
+                    (
+                        (cella.x == da.x && cella.y == da.y - 1) ||
+                        (cella.x == da.x && cella.y == da.y + 1) ||
+                        (cella.x == da.x - 1 && cella.y == da.y) ||
+                        (cella.x == da.x + 1 && cella.y == da.y)
+                    )
+                    ).ToList();
+
+            foreach (Casella singola in possibili) //scorro le celle possibili e le analizzo
+            {
+                if(!percorso.Contains($"[{singola.x} {singola.y}]"))
+                {
+                    Analizza2(scacchiera, singola, a, $"{percorso} [{da.x} {da.y}]"); //aggiungo al percorso la casella attuale
+                }
             }
         }
     }
