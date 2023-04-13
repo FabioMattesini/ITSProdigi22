@@ -29,7 +29,7 @@ namespace TrovaFile
             IEnumerable<string> sottodirectory;
             try //uso un try catch perchè potrei accedere a un file senza avere il permesso
             {
-                files = Directory.EnumerateFiles(path);
+                files = Directory.EnumerateFiles(path); //EnumerateFiles mi restituisce il nome di tutti i file nel path specificato
             }
             catch (Exception errore)
             {
@@ -40,7 +40,7 @@ namespace TrovaFile
 
             try
             {
-                sottodirectory = Directory.EnumerateDirectories(path);
+                sottodirectory = Directory.EnumerateDirectories(path); //EnumerateDirectories restituisce il nome di tutte le cartelle nel path specificato
             }
             catch (Exception errore)
             {
@@ -51,7 +51,7 @@ namespace TrovaFile
 
             foreach (string singolo in files)
             {
-                if (singolo.EndsWith(estensione))
+                if (singolo.EndsWith(estensione)) //stampo tutti i file che finiscono con l'estensione specificata
                 {
                     Console.WriteLine(singolo);
                 }
