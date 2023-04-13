@@ -23,6 +23,11 @@ namespace TrovaFile
             }
         }
 
+        /// <summary>
+        /// Metodo che cerca tutti i file con una certa estensione nel path specificato ricorsivamente
+        /// </summary>
+        /// <param name="estensione">Estensione dei file da cercare</param>
+        /// <param name="path">Path di partenza della ricerca</param>
         public static void TrovaFile(String estensione, string path = "C:\\") //metodo che cerca un file con una certa estensione
         {
             IEnumerable<string> files;
