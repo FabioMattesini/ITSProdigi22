@@ -5,6 +5,7 @@
         private static List<Casella> Scacchiera;
         private static Casella inizio;
         private static Casella fine;
+        private static List<String> soluzioni = new List<string>();
 
         static void Main(string[] args)
         {
@@ -31,7 +32,13 @@
                 }
             }
             List<Casella>? percorso = null;
-            Analizza(Scacchiera, inizio, fine, percorso);
+            //Analizza(Scacchiera, inizio, fine, percorso);
+            AnalizzaProf(Scacchiera, inizio, fine);
+            string migliore = soluzioni.OrderBy( x => x.Length).FirstOrDefault(); //ordino le soluzioni per lunghezza e estraggo la prima
+            if(migliore != null )
+            {
+                Console.WriteLine($"Vince:{migliore}");
+            }
         }
 
         private static void Analizza(List<Casella> scacchiera, Casella attuale, Casella arrivo, List<Casella>? percorso)
@@ -90,6 +97,49 @@
                 }
 
                 percorso.RemoveAt(percorso.Count-1);
+            }
+        }
+
+        private static void AnalizzaProf(List<Casella> scacchiera, Casella attuale, Casella arrivo, string percorso="")
+        {
+            
+
+            if (attuale.x == arrivo.x && attuale.y == arrivo.y)
+            {
+                soluzioni.Add(percorso);
+                Console.WriteLine("Fatto:" + percorso);
+                
+            }
+            else
+            {
+                //analizza su
+                Casella? su = scacchiera.Where(cella => cella.muro == false && cella.x == attuale.x && cella.y == attuale.y - 1).FirstOrDefault(); //prendo il primo valore in alto
+                if (su != null && !percorso.Contains($"[{su.x} {su.y}]")) //se la prossima casella non è nulla e percorso non contiene già la casella continuo ad analizzare
+                {
+                    AnalizzaProf(scacchiera, su, arrivo, percorso + $"[{attuale.x} {attuale.y}]"); //aggiungo al percorso la mia posizione attuale
+                }
+
+                //analizza dx
+                Casella? dx = scacchiera.Where(cella => cella.muro == false && cella.x == attuale.x + 1 && cella.y == attuale.y).FirstOrDefault();
+                if (dx != null && !percorso.Contains($"[{dx.x} {dx.y}]"))
+                {
+                    AnalizzaProf(scacchiera, dx, arrivo, percorso + $"[{attuale.x} {attuale.y}]");
+                }
+
+                //analizza giu
+                Casella? giu = scacchiera.Where(cella => cella.muro == false && cella.x == attuale.x && cella.y == attuale.y + 1).FirstOrDefault();
+                if (giu != null && !percorso.Contains($"[{giu.x} {giu.y}]"))
+                {
+                    AnalizzaProf(scacchiera, giu, arrivo, percorso + $"[{attuale.x} {attuale.y}]");
+                }
+
+                //analizza sx
+                Casella? sx = scacchiera.Where(cella => cella.muro == false && cella.x == attuale.x - 1 && cella.y == attuale.y).FirstOrDefault();
+                if (sx != null && !percorso.Contains($"[{sx.x} {sx.y}]"))
+                {
+                    AnalizzaProf(scacchiera, sx, arrivo, percorso + $"[{attuale.x} {attuale.y}]");
+                }
+
             }
         }
     }
