@@ -30,12 +30,18 @@
                     Scacchiera.Add(new (x, y, muro)); //da .NET 6.0 si può omettere il nome della classe
                 }
             }
-            List<Casella>? percorso = new List<Casella>();
+            List<Casella>? percorso = null;
             Analizza(Scacchiera, inizio, fine, percorso);
         }
 
         private static void Analizza(List<Casella> scacchiera, Casella attuale, Casella arrivo, List<Casella>? percorso)
         {
+            if(percorso == null)
+            {
+                percorso = new List<Casella>();
+                percorso.Add(attuale);
+            }
+
             if (attuale.x == arrivo.x && attuale.y == arrivo.y)
             {
                 Console.WriteLine("Fatto!");
@@ -82,6 +88,8 @@
                     percorso.Add(sx);
                     Analizza(scacchiera, sx, arrivo, percorso);
                 }
+
+                percorso.RemoveAt(percorso.Count-1);
             }
         }
     }
