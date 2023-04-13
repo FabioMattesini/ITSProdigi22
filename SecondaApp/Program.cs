@@ -6,12 +6,12 @@ namespace SecondaApp
     {
         static void Main(string[] args)
         {
-            TrovaFile(".sql");
-            //int tabellina = int.Parse(args[0]);
-            //int ripetizioni = int.Parse(args[1]);
+            //TrovaFile(".sql");
+            int tabellina = int.Parse(args[0]);
+            int ripetizioni = int.Parse(args[1]);
 
 
-            //Moltiplica(tabellina, ripetizioni, 0);
+            Moltiplica(tabellina, ripetizioni, 0);
 
         }
 
