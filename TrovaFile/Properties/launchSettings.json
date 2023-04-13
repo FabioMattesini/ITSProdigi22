@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TrovaFile": {
+      "commandName": "Project",
+      "commandLineArgs": ".sql C:\\"
+    }
+  }
+}

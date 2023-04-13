@@ -34,5 +34,18 @@ namespace PrimaApp
             int risposta = int.Parse(Console.ReadLine());
             return risposta;
         }
+
+        public static void scriviFile(int baseTabellina, int volte)
+        {
+            string nomeFile = $"tabellina_{baseTabellina}.txt";
+            File.WriteAllText(nomeFile, $"TABELLINA DEL {baseTabellina}\n");
+
+            for (int i = 0; i < volte; i++)
+            {
+                int risultato = i * baseTabellina;
+                string testo = $"{i}\t*\t{baseTabellina}\t=\t{risultato}\n";
+                File.AppendAllText(nomeFile, testo);
+            }
+        }
     }
 }
