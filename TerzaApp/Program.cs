@@ -147,7 +147,7 @@
 
         private static void Analizza2(List<Casella> scacchiera, Casella da, Casella a, String percorso="") //versione ottimizzata di AnalizzaProf
         {
-            //somportamento selettivo
+            //comportamento selettivo
             if(da.y == a.y && da.x == a.x)
             {
                 soluzioni.Add(percorso);
