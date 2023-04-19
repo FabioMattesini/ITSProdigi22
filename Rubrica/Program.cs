@@ -6,6 +6,8 @@
         static void Main(string[] args)
         {
             contatti = new List<Contatto>();
+            string comando = "";
+
         }
 
         static private string chiedi(string domanda)
