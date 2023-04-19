@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerzaApp", "TerzaApp\TerzaA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrovaFile", "TrovaFile\TrovaFile.csproj", "{E8B75016-E3AE-4028-A0CA-3442E2FC9B3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartaApp", "QuartaApp\QuartaApp.csproj", "{EEE6470F-85ED-4D66-9149-51AF4C971C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuartaApp", "QuartaApp\QuartaApp.csproj", "{EEE6470F-85ED-4D66-9149-51AF4C971C16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rubrica", "Rubrica\Rubrica.csproj", "{95D9E7E3-6E31-41BE-B31B-6DCDEDE04013}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D9E7E3-6E31-41BE-B31B-6DCDEDE04013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D9E7E3-6E31-41BE-B31B-6DCDEDE04013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D9E7E3-6E31-41BE-B31B-6DCDEDE04013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D9E7E3-6E31-41BE-B31B-6DCDEDE04013}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
