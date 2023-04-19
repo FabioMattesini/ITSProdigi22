@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Security.Cryptography;
 
 namespace QuartaApp
 {
@@ -20,7 +21,7 @@ namespace QuartaApp
             Persona nuova = new Persona(persone[0].nome, persone[0].cognome, persone[0].eta);
             nuova.eta = 65;
 
-            Clona(nuova);
+            Compila(nuova);
 
             int totale = sommaEta(persone[0], persone[1]);
             Console.WriteLine($"Totale delle età: {totale}");
@@ -40,14 +41,22 @@ namespace QuartaApp
         }
 
         
-        static void Clona(object oggetto)
+        static void Compila(object oggetto)
         {
             Type tipo = oggetto.GetType();
             PropertyInfo[] props = tipo.GetProperties(); //ottengo le proprietà del tipo
-            foreach (PropertyInfo pi in props)
+            foreach (PropertyInfo pi in props.Where(x => x.CanWrite)) //scorro solo le prorietà sulle quali posso scrivere
             {
                 Console.WriteLine($"Dimmi {pi.Name}");
                 var appoggio = Console.ReadLine();
+                if(pi.PropertyType.Name == "Int32")
+                {
+                    pi.SetValue(oggetto, int.Parse(appoggio));
+                }
+                else
+                {
+                    pi.SetValue(oggetto, appoggio);
+                }
             }
         }
     }

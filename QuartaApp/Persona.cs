@@ -18,6 +18,10 @@ namespace QuartaApp
         [Required]
         public string cognome { get; set; }
         public int eta { get; set; }
+        public DateTime creazione { get; } = DateTime.Now;
+        public string indirizzo { get; set; }
+        public string targa { get; set; }
+        public int cellulare { get; set; }
 
         public Persona(string nome, string cognome, int eta) 
         {
