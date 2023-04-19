@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecondaApp", "SecondaApp\Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerzaApp", "TerzaApp\TerzaApp.csproj", "{6B35A3A0-AFDF-4A0F-A679-505844356F7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrovaFile", "TrovaFile\TrovaFile.csproj", "{E8B75016-E3AE-4028-A0CA-3442E2FC9B3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrovaFile", "TrovaFile\TrovaFile.csproj", "{E8B75016-E3AE-4028-A0CA-3442E2FC9B3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartaApp", "QuartaApp\QuartaApp.csproj", "{EEE6470F-85ED-4D66-9149-51AF4C971C16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E8B75016-E3AE-4028-A0CA-3442E2FC9B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8B75016-E3AE-4028-A0CA-3442E2FC9B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8B75016-E3AE-4028-A0CA-3442E2FC9B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE6470F-85ED-4D66-9149-51AF4C971C16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
