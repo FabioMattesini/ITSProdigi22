@@ -34,7 +34,6 @@ namespace Rubrica
                         }
                         break;
 
-                        //TODO
                     case "cancella":
                         string daEliminare = chiedi("Scrivi il nome del contatto da eliminare:", false);
                         List<Contatto> lista = contatti.Where(x => x.nome.Contains(daEliminare)).ToList(); //creo una lista dei contatti potenzialmente da eliminare
@@ -46,7 +45,7 @@ namespace Rubrica
                         {
                             Console.WriteLine("Tra i contatti trovati quali devo eliminare?");
                             int i = 1;
-                            foreach (var contatto in lista)
+                            foreach (Contatto contatto in lista)
                             {
                                 Console.WriteLine($"{i}){contatto}");
                                 i++;
@@ -58,8 +57,35 @@ namespace Rubrica
                         }
                         break;
 
-                    //TODO
                     case "modifica":
+                        string daModificare = chiedi("Scrivi il nome del contatto da modificare:");
+                        List<Contatto> listModify = contatti.Where(x => x.nome.Contains(daModificare)).ToList();
+                        if(listModify.Count == 0)
+                        {
+                            Console.WriteLine("Il contatto cercato non è presente!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tra i contatti trovati quali devo modificare?");
+                            int i = 1;
+                            foreach(Contatto contatto in listModify) 
+                            {
+                                Console.WriteLine($"{i}){contatto}");
+                                i++;
+                            }
+                            int index = Convert.ToInt32(chiedi("Inserisci il numero corrispondente al contatto da modificare:", false)) - 1;
+                            string nome = chiedi("Inserisci il nuovo nome (lasciare vuoto se non si intende modificare):");
+                            string cognome = chiedi("Inserisci il nuovo cognome (lasciare vuoto se non si intende modificare):");
+                            string telefono = chiedi("Inserisci il nuovo nuemro di telefono (lasciare vuoto se non si intende modificare)");
+                            if(!nome.Trim().Equals(""))
+                                listModify[index].nome = nome;
+                            if (!cognome.Trim().Equals(""))
+                                listModify[index].cognome = cognome;
+                            if (!telefono.Trim().Equals(""))
+                                listModify[index].telefono = telefono;
+
+                            Console.WriteLine("Contatto modificato!");
+                        }
                         break;
                      
                     case "salva": //salvo la rubrica serializzandola su un file JSON
