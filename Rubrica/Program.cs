@@ -74,7 +74,7 @@ namespace Rubrica
                         break;
 
                     case "modifica":
-                        string daModificare = chiedi("Scrivi il nome del contatto da modificare:");
+                        /*string daModificare = chiedi("Scrivi il nome del contatto da modificare:");
                         List<Contatto> listModify = contatti.Where(x => x.nome.Contains(daModificare)).ToList();
                         if(listModify.Count == 0)
                         {
@@ -101,7 +101,13 @@ namespace Rubrica
                                 listModify[index].telefono = telefono;
 
                             Console.WriteLine("Contatto modificato!");
-                        }
+                        }*/
+
+                        int idDaModificare = int.Parse(chiedi("Quale id devo modificare?", false));
+                        Contatto daModificare = contatti.Where(x => x.idContatto == idDaModificare).FirstOrDefault();
+                        daModificare.nome = chiedi("Inserisci il nuovo nome:", false);
+                        daModificare.cognome = chiedi("Inserisci il nuovo cognome:", false);
+                        daModificare.telefono = chiedi("Inserisci il nuovo numero di telefono", false);
                         break;
                      
                     case "salva": //salvo la rubrica serializzandola su un file JSON
