@@ -11,7 +11,7 @@ namespace Rubrica
             string comando;
             do
             {
-                comando = chiedi("cosa vuoi fare?\n-nuovo\n-vedi\n-cancella\n-modifica\n-salva\n-apri\n");
+                comando = chiedi("cosa vuoi fare?\n-nuovo\n-vedi\n-cancella\n-modifica\n-salva\n-carica\n");
                 switch (comando)
                 {
                     case "nuovo": //Create
@@ -93,14 +93,14 @@ namespace Rubrica
                         Console.WriteLine("Rubrica salvata su disco!");
                         break;
 
-                    case "apri": //Deserializzo il file JSON
+                    case "carica": //Deserializzo il file JSON
                         try
                         {
                             string buffer = File.ReadAllText("rubrica.json");
                             contatti = JsonSerializer.Deserialize<List<Contatto>>(buffer);
                             Console.WriteLine($"Caricati {contatti.Count} contatti");
                         }
-                        catch
+                        catch //si può omettere l'eccezione
                         {
                             contatti = new();
                             Console.WriteLine("Errore di caricamento del file!");
