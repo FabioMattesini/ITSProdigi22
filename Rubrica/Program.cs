@@ -15,8 +15,19 @@ namespace Rubrica
                 switch (comando)
                 {
                     case "nuovo": //Create
+                        int nuovoId;
+                        try
+                        {
+                            nuovoId = contatti.Max(x => x.idContatto) + 1; //prendo l'id più grande presente 
+                        }
+                        catch
+                        {
+                            nuovoId = 1;
+                        }
+                         
                         contatti.Add(
                                 new(
+                                        nuovoId,
                                         chiedi("Nome:", false),
                                         chiedi("Cognome:", false),
                                         chiedi("Telefono:", false)
@@ -35,7 +46,7 @@ namespace Rubrica
                         break;
 
                     case "cancella":
-                        string daEliminare = chiedi("Scrivi il nome del contatto da eliminare:", false);
+                        /*string daEliminare = chiedi("Scrivi il nome del contatto da eliminare:", false);
                         List<Contatto> lista = contatti.Where(x => x.nome.Contains(daEliminare)).ToList(); //creo una lista dei contatti potenzialmente da eliminare
                         if(lista.Count == 0) 
                         {
@@ -54,7 +65,12 @@ namespace Rubrica
                             contatti.Remove(lista[index]); //rimuovo dai contatti il contatto specificato dall'utente
                             Contatto.quanti--;
                             Console.WriteLine("Contatto eliminato!");
-                        }
+                        }*/
+
+                        //SOLUZIONE PROF
+                        int idDaCancellare = int.Parse(chiedi("Quale id devo eliminare?"));
+                        int cancellati = contatti.RemoveAll(x => x.idContatto == idDaCancellare); //removeAll rimuove tutti gli elementi che rispettano il predicato specificato
+                        Console.WriteLine($"{cancellati} record cancellati");
                         break;
 
                     case "modifica":
@@ -100,10 +116,11 @@ namespace Rubrica
                             contatti = JsonSerializer.Deserialize<List<Contatto>>(buffer);
                             Console.WriteLine($"Caricati {contatti.Count} contatti");
                         }
-                        catch //si può omettere l'eccezione
+                        catch(Exception eccezione) //si può omettere l'eccezione
                         {
                             contatti = new();
                             Console.WriteLine("Errore di caricamento del file!");
+                            Console.WriteLine(eccezione.Message);
                         }
                         break;
 
