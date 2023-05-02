@@ -11,7 +11,7 @@ namespace Rubrica
             string comando;
             do
             {
-                comando = chiedi("cosa vuoi fare?");
+                comando = chiedi("cosa vuoi fare?\n-nuovo\n-vedi\n-cancella\n-modifica\n-salva\n-apri\n");
                 switch (comando)
                 {
                     case "nuovo": //Create
