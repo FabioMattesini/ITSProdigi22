@@ -11,7 +11,7 @@ namespace Rubrica
             string comando;
             do
             {
-                comando = chiedi("cosa vuoi fare?\n-nuovo\n-vedi\n-cancella\n-modifica\n-salva\n-carica\n");
+                comando = chiedi("cosa vuoi fare?\n- nuovo\n- vedi\n- cancella\n- modifica\n- salva\n- carica\n");
                 switch (comando)
                 {
                     case "nuovo": //Create
@@ -37,8 +37,9 @@ namespace Rubrica
                         break;
 
                     case "vedi": //Read
-                        string chi = chiedi("Chi devo cercare?", false);
+                        string chi = chiedi("Chi devo cercare? (premi invio per visualizzare tutti i contatti)", false);
                         List<Contatto> selezionati = contatti.Where(x => x.nome.Contains(chi)).ToList();
+                        Console.WriteLine("Id\tNome\tCognome\tTelefono\tCreazione");
                         foreach (Contatto singolo in selezionati)
                         {
                             Console.WriteLine(singolo);
@@ -104,10 +105,17 @@ namespace Rubrica
                         }*/
 
                         int idDaModificare = int.Parse(chiedi("Quale id devo modificare?", false));
-                        Contatto daModificare = contatti.Where(x => x.idContatto == idDaModificare).FirstOrDefault();
-                        daModificare.nome = chiedi("Inserisci il nuovo nome:", false);
-                        daModificare.cognome = chiedi("Inserisci il nuovo cognome:", false);
-                        daModificare.telefono = chiedi("Inserisci il nuovo numero di telefono", false);
+                        Contatto? daModificare = contatti.Where(x => x.idContatto == idDaModificare).FirstOrDefault();
+                        if(daModificare != null)
+                        {
+                            daModificare.nome = chiedi($"Inserisci il nuovo nome: (nome attuale {daModificare.nome})", false);
+                            daModificare.cognome = chiedi($"Inserisci il nuovo cognome: (cognome attuale {daModificare.cognome})", false);
+                            daModificare.telefono = chiedi($"Inserisci il nuovo numero di telefono: (telefono attuale {daModificare.telefono})", false);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Id non presente!");
+                        }
                         break;
                      
                     case "salva": //salvo la rubrica serializzandola su un file JSON
