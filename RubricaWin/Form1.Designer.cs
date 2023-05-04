@@ -45,7 +45,7 @@
             txtNome.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtNome.Location = new Point(106, 48);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(224, 23);
+            txtNome.Size = new Size(300, 23);
             txtNome.TabIndex = 0;
             // 
             // txtCognome
@@ -53,7 +53,7 @@
             txtCognome.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtCognome.Location = new Point(106, 77);
             txtCognome.Name = "txtCognome";
-            txtCognome.Size = new Size(224, 23);
+            txtCognome.Size = new Size(300, 23);
             txtCognome.TabIndex = 1;
             // 
             // txtTelefono
@@ -61,7 +61,7 @@
             txtTelefono.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtTelefono.Location = new Point(106, 106);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(224, 23);
+            txtTelefono.Size = new Size(300, 23);
             txtTelefono.TabIndex = 2;
             // 
             // label1
@@ -100,7 +100,7 @@
             btnInserisci.BackColor = Color.Turquoise;
             btnInserisci.Location = new Point(106, 153);
             btnInserisci.Name = "btnInserisci";
-            btnInserisci.Size = new Size(224, 23);
+            btnInserisci.Size = new Size(300, 23);
             btnInserisci.TabIndex = 6;
             btnInserisci.Text = "Inserisci";
             btnInserisci.UseVisualStyleBackColor = false;
@@ -113,7 +113,7 @@
             lstContatti.ItemHeight = 15;
             lstContatti.Location = new Point(106, 314);
             lstContatti.Name = "lstContatti";
-            lstContatti.Size = new Size(224, 139);
+            lstContatti.Size = new Size(300, 184);
             lstContatti.TabIndex = 7;
             // 
             // btnCarica
@@ -124,7 +124,7 @@
             btnCarica.TabIndex = 8;
             btnCarica.Text = "Carica";
             btnCarica.UseVisualStyleBackColor = true;
-            btnCarica.Click += button1_Click;
+            btnCarica.Click += btnCarica_Click;
             // 
             // btnVisualizza
             // 
@@ -140,7 +140,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(364, 583);
+            ClientSize = new Size(440, 631);
             Controls.Add(btnVisualizza);
             Controls.Add(btnCarica);
             Controls.Add(lstContatti);
@@ -153,6 +153,7 @@
             Controls.Add(txtNome);
             Name = "Rubrica";
             Text = "Rubrica";
+            FormClosed += Rubrica_FormClosed;
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

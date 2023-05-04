@@ -26,7 +26,7 @@ namespace RubricaWin
 
         public override string ToString()
         {
-            return $"{idContatto}\t{nome}\t{cognome}\t{telefono}\t{creazione}";
+            return $"{idContatto}\t{nome}\t{cognome}\t{telefono}";
         }
     }
 }

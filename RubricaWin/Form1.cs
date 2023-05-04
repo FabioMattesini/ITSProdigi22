@@ -5,15 +5,18 @@ namespace RubricaWin
     public partial class Rubrica : Form
     {
         List<Contatto> contatti = new List<Contatto>();
-        public Rubrica(String filepath)
+        public Rubrica(String filepath) //costruttore della finestra principale
         {
             InitializeComponent();
             this.Text = filepath;
             try
             {
-;                string buffer = File.ReadAllText(filepath);
-                Contatto[] recuperati = JsonSerializer.Deserialize<Contatto[]>(buffer);
-                lstContatti.Items.AddRange(recuperati);
+                string buffer = File.ReadAllText(filepath);
+                contatti = JsonSerializer.Deserialize<List<Contatto>>(buffer);
+                foreach (Contatto c in contatti)
+                {
+                    lstContatti.Items.Add(c);
+                }
             }
             catch
             {
@@ -61,8 +64,9 @@ namespace RubricaWin
             txtTelefono.Clear();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCarica_Click(object sender, EventArgs e)
         {
+            lstContatti.Items.Clear();
             try
             {
                 string buffer = File.ReadAllText("rubricaForm.json");
@@ -87,6 +91,24 @@ namespace RubricaWin
             {
                 lstContatti.Items.Add(c.ToString());
             }
+        }
+
+        private void btnApri_Click(object sender, EventArgs e)
+        {
+            Rubrica nuovaFinestra = new Rubrica("rubricaForm.json");
+            //nuovaFinestra.Show();
+            nuovaFinestra.FormBorderStyle = FormBorderStyle.None;
+            nuovaFinestra.WindowState = FormWindowState.Maximized;
+            nuovaFinestra.ShowDialog(); //blocca l'interazione sulla finestra attuale impedendo di passare a quella precedente
+
+        }
+
+
+
+        private void Rubrica_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string buffer = JsonSerializer.Serialize(lstContatti.Items);
+            File.WriteAllText(this.Text, buffer);
         }
     }
 }
