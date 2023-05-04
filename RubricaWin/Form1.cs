@@ -11,16 +11,16 @@ namespace RubricaWin
             this.Text = filepath;
             try
             {
-                string buffer = File.ReadAllText(filepath);
-                contatti = JsonSerializer.Deserialize<List<Contatto>>(buffer);
+                //string buffer = File.ReadAllText(filepath);
+                contatti = JsonSerializer.Deserialize<List<Contatto>>(File.ReadAllText(filepath));
                 foreach (Contatto c in contatti)
                 {
                     lstContatti.Items.Add(c);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -58,7 +58,7 @@ namespace RubricaWin
 
             contatti.Add(new Contatto(nuovoId, txtNome.Text, txtCognome.Text, txtTelefono.Text));
             lstContatti.Items.Add(contatti[contatti.Count - 1]);
-            File.WriteAllText("rubricaForm.json", JsonSerializer.Serialize(contatti));
+            save();
             clearAllTextBox();
         }
 
@@ -101,6 +101,7 @@ namespace RubricaWin
                 try
                 {
                     contatti.RemoveAt(index);
+                    save();
                     lstContatti.Items.Clear();
                     clearAllTextBox();
                     foreach (Contatto c in contatti)
@@ -120,6 +121,11 @@ namespace RubricaWin
             txtNome.Clear();
             txtCognome.Clear();
             txtTelefono.Clear();
+        }
+
+        private void save()
+        {
+            File.WriteAllText("rubricaForm.json", JsonSerializer.Serialize(contatti));
         }
     }
 }
