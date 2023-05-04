@@ -36,6 +36,7 @@
             label3 = new Label();
             btnInserisci = new Button();
             lstContatti = new ListBox();
+            btnModifica = new Button();
             SuspendLayout();
             // 
             // txtNome
@@ -116,11 +117,22 @@
             lstContatti.SelectedIndexChanged += lstContatti_SelectedIndexChanged;
             lstContatti.KeyPress += lstContatti_KeyPress;
             // 
+            // btnModifica
+            // 
+            btnModifica.Location = new Point(106, 182);
+            btnModifica.Name = "btnModifica";
+            btnModifica.Size = new Size(300, 23);
+            btnModifica.TabIndex = 8;
+            btnModifica.Text = "Modifica";
+            btnModifica.UseVisualStyleBackColor = true;
+            btnModifica.Click += btnModifica_Click;
+            // 
             // Rubrica
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(440, 631);
+            Controls.Add(btnModifica);
             Controls.Add(lstContatti);
             Controls.Add(btnInserisci);
             Controls.Add(label3);
@@ -131,8 +143,8 @@
             Controls.Add(txtNome);
             Name = "Rubrica";
             Text = "Rubrica";
+            Activated += Rubrica_Activated;
             FormClosed += Rubrica_FormClosed;
-            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -147,5 +159,6 @@
         private Label label3;
         private Button btnInserisci;
         private ListBox lstContatti;
+        private Button btnModifica;
     }
 }

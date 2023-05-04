@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogoInteressi", "Catalo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RubricaWin", "RubricaWin\RubricaWin.csproj", "{6088E005-F2DB-4FE5-AF0E-B5A256736800}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloccoNote", "BloccoNote\BloccoNote.csproj", "{12F7E974-3B21-45CC-B67A-364FC274D71F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloccoNote", "BloccoNote\BloccoNote.csproj", "{12F7E974-3B21-45CC-B67A-364FC274D71F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

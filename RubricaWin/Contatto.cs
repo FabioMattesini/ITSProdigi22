@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RubricaWin
 {
-    internal class Contatto
+    public class Contatto
     {
         public static int quanti { get; set; }
         public int idContatto { get; }

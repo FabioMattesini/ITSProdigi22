@@ -18,15 +18,10 @@ namespace RubricaWin
                     lstContatti.Items.Add(c);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -87,7 +82,7 @@ namespace RubricaWin
                 txtCognome.Text = contatti[index].cognome;
                 txtTelefono.Text = contatti[index].telefono;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -122,6 +117,31 @@ namespace RubricaWin
         private void save()
         {
             File.WriteAllText("rubricaForm.json", JsonSerializer.Serialize(contatti));
+        }
+
+        private void btnModifica_Click(object sender, EventArgs e)
+        {
+            int index = lstContatti.SelectedIndex;
+            try
+            {
+                Contatto daModificare = contatti[index];
+                FormModifica frmModifica = new FormModifica(daModificare, this);
+                frmModifica.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            clearAllTextBox();
+        }
+
+        private void Rubrica_Activated(object sender, EventArgs e)
+        {
+            lstContatti.Items.Clear();
+            foreach (Contatto c in contatti)
+            {
+                lstContatti.Items.Add(c);
+            }
         }
     }
 }

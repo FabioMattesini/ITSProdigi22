@@ -1,6 +1,6 @@
 ﻿namespace RubricaWin
 {
-    partial class Form2
+    partial class FormModifica
     {
         /// <summary>
         /// Required designer variable.
@@ -75,7 +75,6 @@
             lblCognome.Size = new Size(60, 15);
             lblCognome.TabIndex = 4;
             lblCognome.Text = "Cognome";
-            lblCognome.Click += txtCognome_Click;
             // 
             // lblTelefono
             // 
@@ -94,8 +93,9 @@
             btnModifica.TabIndex = 6;
             btnModifica.Text = "Modifica";
             btnModifica.UseVisualStyleBackColor = true;
+            btnModifica.Click += btnModifica_Click;
             // 
-            // Form2
+            // FormModifica
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -107,7 +107,7 @@
             Controls.Add(txtModTelefono);
             Controls.Add(txtModCognome);
             Controls.Add(txtModNome);
-            Name = "Form2";
+            Name = "FormModifica";
             Text = "Form2";
             ResumeLayout(false);
             PerformLayout();
