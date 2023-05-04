@@ -5,10 +5,20 @@ namespace RubricaWin
     public partial class Rubrica : Form
     {
         List<Contatto> contatti = new List<Contatto>();
-        public Rubrica()
+        public Rubrica(String filepath)
         {
             InitializeComponent();
+            this.Text = filepath;
+            try
+            {
+;                string buffer = File.ReadAllText(filepath);
+                Contatto[] recuperati = JsonSerializer.Deserialize<Contatto[]>(buffer);
+                lstContatti.Items.AddRange(recuperati);
+            }
+            catch
+            {
 
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
