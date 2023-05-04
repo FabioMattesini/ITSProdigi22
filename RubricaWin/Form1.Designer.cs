@@ -36,8 +36,6 @@
             label3 = new Label();
             btnInserisci = new Button();
             lstContatti = new ListBox();
-            btnCarica = new Button();
-            btnVisualizza = new Button();
             SuspendLayout();
             // 
             // txtNome
@@ -111,38 +109,16 @@
             lstContatti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lstContatti.FormattingEnabled = true;
             lstContatti.ItemHeight = 15;
-            lstContatti.Location = new Point(106, 314);
+            lstContatti.Location = new Point(106, 223);
             lstContatti.Name = "lstContatti";
             lstContatti.Size = new Size(300, 184);
             lstContatti.TabIndex = 7;
-            // 
-            // btnCarica
-            // 
-            btnCarica.Location = new Point(106, 182);
-            btnCarica.Name = "btnCarica";
-            btnCarica.Size = new Size(224, 23);
-            btnCarica.TabIndex = 8;
-            btnCarica.Text = "Carica";
-            btnCarica.UseVisualStyleBackColor = true;
-            btnCarica.Click += btnCarica_Click;
-            // 
-            // btnVisualizza
-            // 
-            btnVisualizza.Location = new Point(106, 211);
-            btnVisualizza.Name = "btnVisualizza";
-            btnVisualizza.Size = new Size(224, 23);
-            btnVisualizza.TabIndex = 9;
-            btnVisualizza.Text = "Visualizza contatti";
-            btnVisualizza.UseVisualStyleBackColor = true;
-            btnVisualizza.Click += btnVisualizza_Click;
             // 
             // Rubrica
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(440, 631);
-            Controls.Add(btnVisualizza);
-            Controls.Add(btnCarica);
             Controls.Add(lstContatti);
             Controls.Add(btnInserisci);
             Controls.Add(label3);
@@ -169,7 +145,5 @@
         private Label label3;
         private Button btnInserisci;
         private ListBox lstContatti;
-        private Button btnCarica;
-        private Button btnVisualizza;
     }
 }

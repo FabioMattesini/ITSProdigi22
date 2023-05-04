@@ -64,35 +64,6 @@ namespace RubricaWin
             txtTelefono.Clear();
         }
 
-        private void btnCarica_Click(object sender, EventArgs e)
-        {
-            lstContatti.Items.Clear();
-            try
-            {
-                string buffer = File.ReadAllText("rubricaForm.json");
-                contatti = JsonSerializer.Deserialize<List<Contatto>>(buffer);
-                Console.WriteLine($"Caricati {contatti.Count} contatti");
-                foreach (Contatto c in contatti)
-                {
-                    lstContatti.Items.Add(c.ToString());
-                }
-            }
-            catch (Exception eccezione) //si può omettere l'eccezione
-            {
-                contatti = new();
-                Console.WriteLine("Errore di caricamento del file!");
-                Console.WriteLine(eccezione.Message);
-            }
-        }
-
-        private void btnVisualizza_Click(object sender, EventArgs e)
-        {
-            foreach (Contatto c in contatti)
-            {
-                lstContatti.Items.Add(c.ToString());
-            }
-        }
-
         private void btnApri_Click(object sender, EventArgs e)
         {
             Rubrica nuovaFinestra = new Rubrica("rubricaForm.json");
@@ -102,8 +73,6 @@ namespace RubricaWin
             nuovaFinestra.ShowDialog(); //blocca l'interazione sulla finestra attuale impedendo di passare a quella precedente
 
         }
-
-
 
         private void Rubrica_FormClosed(object sender, FormClosedEventArgs e)
         {
