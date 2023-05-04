@@ -101,13 +101,9 @@ namespace RubricaWin
                 try
                 {
                     contatti.RemoveAt(index);
+                    lstContatti.Items.RemoveAt(index);
                     save();
-                    lstContatti.Items.Clear();
                     clearAllTextBox();
-                    foreach (Contatto c in contatti)
-                    {
-                        lstContatti.Items.Add(c);
-                    }
                 }
                 catch (Exception ex)
                 {
