@@ -113,6 +113,8 @@
             lstContatti.Name = "lstContatti";
             lstContatti.Size = new Size(300, 184);
             lstContatti.TabIndex = 7;
+            lstContatti.SelectedIndexChanged += lstContatti_SelectedIndexChanged;
+            lstContatti.KeyPress += lstContatti_KeyPress;
             // 
             // Rubrica
             // 
