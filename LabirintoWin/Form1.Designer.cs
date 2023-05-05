@@ -39,6 +39,7 @@
             mnuGomma = new ToolStripMenuItem();
             dlgSalva = new SaveFileDialog();
             dlgApri = new OpenFileDialog();
+            colorDialog1 = new ColorDialog();
             ((System.ComponentModel.ISupportInitialize)pctLabirinto).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -159,5 +160,6 @@
         private ToolStripMenuItem cancellaToolStripMenuItem;
         private ToolStripMenuItem mnuPenna;
         private ToolStripMenuItem mnuGomma;
+        private ColorDialog colorDialog1;
     }
 }
