@@ -71,7 +71,6 @@
             label1.Size = new Size(40, 15);
             label1.TabIndex = 3;
             label1.Text = "Nome";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -81,7 +80,6 @@
             label2.Size = new Size(60, 15);
             label2.TabIndex = 4;
             label2.Text = "Cognome";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -91,7 +89,6 @@
             label3.Size = new Size(52, 15);
             label3.TabIndex = 5;
             label3.Text = "Telefono";
-            label3.Click += label3_Click;
             // 
             // btnInserisci
             // 
@@ -107,18 +104,19 @@
             // 
             // lstContatti
             // 
-            lstContatti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lstContatti.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lstContatti.FormattingEnabled = true;
             lstContatti.ItemHeight = 15;
-            lstContatti.Location = new Point(106, 223);
+            lstContatti.Location = new Point(106, 229);
             lstContatti.Name = "lstContatti";
-            lstContatti.Size = new Size(300, 184);
+            lstContatti.Size = new Size(300, 364);
             lstContatti.TabIndex = 7;
             lstContatti.SelectedIndexChanged += lstContatti_SelectedIndexChanged;
             lstContatti.KeyPress += lstContatti_KeyPress;
             // 
             // btnModifica
             // 
+            btnModifica.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnModifica.Location = new Point(106, 182);
             btnModifica.Name = "btnModifica";
             btnModifica.Size = new Size(300, 23);

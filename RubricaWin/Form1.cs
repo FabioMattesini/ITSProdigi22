@@ -11,7 +11,6 @@ namespace RubricaWin
             this.Text = filepath;
             try
             {
-                //string buffer = File.ReadAllText(filepath);
                 contatti = JsonSerializer.Deserialize<List<Contatto>>(File.ReadAllText(filepath));
                 foreach (Contatto c in contatti)
                 {
@@ -22,21 +21,6 @@ namespace RubricaWin
             {
                 Console.WriteLine(ex.Message);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnInserisci_Click(object sender, EventArgs e)
@@ -57,7 +41,7 @@ namespace RubricaWin
             clearAllTextBox();
         }
 
-        private void btnApri_Click(object sender, EventArgs e)
+        private void btnApri_Click(object sender, EventArgs e) //funzione per aprire una nuova finestra (non usata in questo progetto)
         {
             Rubrica nuovaFinestra = new Rubrica("rubricaForm.json");
             //nuovaFinestra.Show();
@@ -76,15 +60,11 @@ namespace RubricaWin
         private void lstContatti_SelectedIndexChanged(object sender, EventArgs e) //quando si seleziona un contatto riporta i dati sulle textbox
         {
             int index = lstContatti.SelectedIndex;
-            try
+            if(index > -1)
             {
                 txtNome.Text = contatti[index].nome;
                 txtCognome.Text = contatti[index].cognome;
                 txtTelefono.Text = contatti[index].telefono;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
         }
 
@@ -93,16 +73,12 @@ namespace RubricaWin
             int index = lstContatti.SelectedIndex;
             if (e.KeyChar == 8) //numero del backspace
             {
-                try
+                if(index > -1)
                 {
                     contatti.RemoveAt(index);
                     lstContatti.Items.RemoveAt(index);
                     save();
                     clearAllTextBox();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
                 }
             }
         }
