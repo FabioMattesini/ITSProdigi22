@@ -13,12 +13,10 @@ namespace RubricaWin
     public partial class FormModifica : Form
     {
         Contatto daModificare;
-        Rubrica rubrica;
-        public FormModifica(Contatto daModificare, Rubrica rubrica)
+        public FormModifica(Contatto daModificare)
         {
             InitializeComponent();
             this.daModificare = daModificare;
-            this.rubrica = rubrica;
             txtModNome.Text = daModificare.nome;
             txtModCognome.Text = daModificare.cognome;
             txtModTelefono.Text = daModificare.telefono;

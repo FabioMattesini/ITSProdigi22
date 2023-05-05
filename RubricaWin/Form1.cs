@@ -68,7 +68,7 @@ namespace RubricaWin
             }
         }
 
-        private void lstContatti_KeyPress(object sender, KeyPressEventArgs e)
+        private void lstContatti_KeyPress(object sender, KeyPressEventArgs e) //CANCELLAZIONE CONTATTO
         {
             int index = lstContatti.SelectedIndex;
             if (e.KeyChar == 8) //numero del backspace
@@ -101,7 +101,7 @@ namespace RubricaWin
             try
             {
                 Contatto daModificare = contatti[index];
-                FormModifica frmModifica = new FormModifica(daModificare, this);
+                FormModifica frmModifica = new FormModifica(daModificare);
                 frmModifica.ShowDialog();
             }
             catch (Exception ex)
