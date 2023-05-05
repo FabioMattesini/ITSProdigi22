@@ -60,21 +60,21 @@
             // mnuApri
             // 
             mnuApri.Name = "mnuApri";
-            mnuApri.Size = new Size(101, 22);
+            mnuApri.Size = new Size(180, 22);
             mnuApri.Text = "Apri";
             mnuApri.Click += mnuApri_Click;
             // 
             // mnuSalva
             // 
             mnuSalva.Name = "mnuSalva";
-            mnuSalva.Size = new Size(101, 22);
+            mnuSalva.Size = new Size(180, 22);
             mnuSalva.Text = "Salva";
             mnuSalva.Click += mnuSalva_Click;
             // 
             // mnuEsci
             // 
             mnuEsci.Name = "mnuEsci";
-            mnuEsci.Size = new Size(101, 22);
+            mnuEsci.Size = new Size(180, 22);
             mnuEsci.Text = "Esci";
             mnuEsci.Click += mnuEsci_Click;
             // 
