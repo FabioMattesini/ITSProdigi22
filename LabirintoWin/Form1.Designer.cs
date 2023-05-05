@@ -28,12 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            pctLabirinto = new PictureBox();
+            lstSoluzioni = new ListBox();
+            btnRisolvi = new Button();
+            ((System.ComponentModel.ISupportInitialize)pctLabirinto).BeginInit();
+            SuspendLayout();
+            // 
+            // pctLabirinto
+            // 
+            pctLabirinto.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pctLabirinto.Location = new Point(12, 12);
+            pctLabirinto.Name = "pctLabirinto";
+            pctLabirinto.Size = new Size(468, 439);
+            pctLabirinto.TabIndex = 0;
+            pctLabirinto.TabStop = false;
+            pctLabirinto.MouseMove += pctLabirinto_MouseMove;
+            // 
+            // lstSoluzioni
+            // 
+            lstSoluzioni.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lstSoluzioni.FormattingEnabled = true;
+            lstSoluzioni.IntegralHeight = false;
+            lstSoluzioni.ItemHeight = 15;
+            lstSoluzioni.Location = new Point(497, 12);
+            lstSoluzioni.Name = "lstSoluzioni";
+            lstSoluzioni.Size = new Size(291, 439);
+            lstSoluzioni.TabIndex = 1;
+            // 
+            // btnRisolvi
+            // 
+            btnRisolvi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnRisolvi.Location = new Point(12, 477);
+            btnRisolvi.Name = "btnRisolvi";
+            btnRisolvi.Size = new Size(776, 39);
+            btnRisolvi.TabIndex = 2;
+            btnRisolvi.Text = "Risolvi";
+            btnRisolvi.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 550);
+            Controls.Add(btnRisolvi);
+            Controls.Add(lstSoluzioni);
+            Controls.Add(pctLabirinto);
+            Name = "Form1";
+            Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)pctLabirinto).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private PictureBox pctLabirinto;
+        private ListBox lstSoluzioni;
+        private Button btnRisolvi;
     }
 }
