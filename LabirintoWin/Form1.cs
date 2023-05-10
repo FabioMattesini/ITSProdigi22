@@ -3,11 +3,12 @@ namespace LabirintoWin
     public partial class Form1 : Form
     {
         private Point precedente = new Point(0, 0);
-        Pen tratto = new Pen(Color.Black, 10);
+        Pen tratto = new Pen(Color.Black, 20);
+
         public Form1()
         {
             InitializeComponent();
-            Bitmap nuova = new Bitmap(2000, 2000); //creo l'immagine da mettere dentro la PictureBox
+            Bitmap nuova = new Bitmap(1000, 1000); //creo l'immagine da mettere dentro la PictureBox
             pctLabirinto.Image = nuova;
             Graphics pennello = Graphics.FromImage(pctLabirinto.Image); //prendo il pennello per disegnare sull'immagine del labirinto
             pennello.Clear(Color.White);
@@ -20,10 +21,27 @@ namespace LabirintoWin
             lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
             if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
             {
-                //Bitmap attuale = (Bitmap)pctLabirinto.Image;
                 Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
                 pennello.DrawLine(tratto, attuale, precedente);
-                //attuale.SetPixel(e.X, e.Y, Color.Black); //coloro alla posizione attuale del mouse
+                pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
+            }
+            precedente = attuale;
+        }
+
+        private void pctLabirinto_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point attuale = new Point(e.X, e.Y);
+            lstSoluzioni.Items.Clear();
+            lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
+            int rectangleWidth = 50;
+            if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
+            {
+                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
+                int gridX = attuale.X / rectangleWidth;
+                int gridY = attuale.Y / rectangleWidth;
+                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleWidth, rectangleWidth, rectangleWidth);
+                Brush b = new SolidBrush(Color.Black);
+                pennello.FillRectangle(b, rettangolo);
                 pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
             }
             precedente = attuale;

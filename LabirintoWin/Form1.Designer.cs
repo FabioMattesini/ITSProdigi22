@@ -52,6 +52,7 @@
             pctLabirinto.Size = new Size(468, 447);
             pctLabirinto.TabIndex = 0;
             pctLabirinto.TabStop = false;
+            pctLabirinto.MouseClick += pctLabirinto_MouseClick;
             pctLabirinto.MouseMove += pctLabirinto_MouseMove;
             // 
             // lstSoluzioni
