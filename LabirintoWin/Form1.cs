@@ -33,13 +33,15 @@ namespace LabirintoWin
             Point attuale = new Point(e.X, e.Y);
             lstSoluzioni.Items.Clear();
             lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
-            int rectangleWidth = pctLabirinto.Width / 10; ;
+            int numeroCelle = 10;
+            int rectangleWidth = pctLabirinto.Width / numeroCelle;
+            int rectangleHeight = pctLabirinto.Height / numeroCelle;
             if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
             {
                 Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
                 int gridX = attuale.X / rectangleWidth; //divido la posizione attuale per la dimensione del rettangolo e poi rimoltiplico di nuovo per questa per ottenere un quadrato che coincide con la griglia
-                int gridY = attuale.Y / rectangleWidth;
-                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleWidth, rectangleWidth, rectangleWidth);
+                int gridY = attuale.Y / rectangleHeight;
+                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
                 Brush b = new SolidBrush(Color.Black);
                 pennello.FillRectangle(b, rettangolo);
                 //pennello.DrawRectangle(new Pen(Color.Black, 1), rettangolo);
