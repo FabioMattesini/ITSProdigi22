@@ -49,7 +49,7 @@
             pctLabirinto.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pctLabirinto.Location = new Point(12, 40);
             pctLabirinto.Name = "pctLabirinto";
-            pctLabirinto.Size = new Size(468, 447);
+            pctLabirinto.Size = new Size(500, 536);
             pctLabirinto.TabIndex = 0;
             pctLabirinto.TabStop = false;
             pctLabirinto.MouseClick += pctLabirinto_MouseClick;
@@ -61,17 +61,17 @@
             lstSoluzioni.FormattingEnabled = true;
             lstSoluzioni.IntegralHeight = false;
             lstSoluzioni.ItemHeight = 15;
-            lstSoluzioni.Location = new Point(497, 40);
+            lstSoluzioni.Location = new Point(543, 40);
             lstSoluzioni.Name = "lstSoluzioni";
-            lstSoluzioni.Size = new Size(291, 447);
+            lstSoluzioni.Size = new Size(420, 536);
             lstSoluzioni.TabIndex = 1;
             // 
             // btnRisolvi
             // 
             btnRisolvi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnRisolvi.Location = new Point(12, 513);
+            btnRisolvi.Location = new Point(12, 582);
             btnRisolvi.Name = "btnRisolvi";
-            btnRisolvi.Size = new Size(776, 39);
+            btnRisolvi.Size = new Size(951, 39);
             btnRisolvi.TabIndex = 2;
             btnRisolvi.Text = "Risolvi";
             btnRisolvi.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuSalva, mnuApri, cancellaToolStripMenuItem, mnuPenna, mnuGomma });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(975, 24);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -133,7 +133,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 586);
+            ClientSize = new Size(975, 622);
             Controls.Add(btnRisolvi);
             Controls.Add(lstSoluzioni);
             Controls.Add(pctLabirinto);
