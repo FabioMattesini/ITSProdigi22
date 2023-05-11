@@ -35,8 +35,8 @@
             mnuSalva = new ToolStripMenuItem();
             mnuApri = new ToolStripMenuItem();
             cancellaToolStripMenuItem = new ToolStripMenuItem();
-            mnuPenna = new ToolStripMenuItem();
-            mnuGomma = new ToolStripMenuItem();
+            muroToolStripMenuItem = new ToolStripMenuItem();
+            inizioFineToolStripMenuItem = new ToolStripMenuItem();
             dlgSalva = new SaveFileDialog();
             dlgApri = new OpenFileDialog();
             colorDialog1 = new ColorDialog();
@@ -49,7 +49,7 @@
             pctLabirinto.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pctLabirinto.Location = new Point(12, 40);
             pctLabirinto.Name = "pctLabirinto";
-            pctLabirinto.Size = new Size(687, 536);
+            pctLabirinto.Size = new Size(643, 536);
             pctLabirinto.TabIndex = 0;
             pctLabirinto.TabStop = false;
             pctLabirinto.MouseClick += pctLabirinto_MouseClick;
@@ -61,9 +61,9 @@
             lstSoluzioni.FormattingEnabled = true;
             lstSoluzioni.IntegralHeight = false;
             lstSoluzioni.ItemHeight = 15;
-            lstSoluzioni.Location = new Point(749, 40);
+            lstSoluzioni.Location = new Point(693, 40);
             lstSoluzioni.Name = "lstSoluzioni";
-            lstSoluzioni.Size = new Size(630, 536);
+            lstSoluzioni.Size = new Size(686, 536);
             lstSoluzioni.TabIndex = 1;
             // 
             // btnRisolvi
@@ -78,7 +78,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuSalva, mnuApri, cancellaToolStripMenuItem, mnuPenna, mnuGomma });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuSalva, mnuApri, cancellaToolStripMenuItem, muroToolStripMenuItem, inizioFineToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1391, 24);
@@ -106,19 +106,19 @@
             cancellaToolStripMenuItem.Text = "Cancella";
             cancellaToolStripMenuItem.Click += cancellaToolStripMenuItem_Click;
             // 
-            // mnuPenna
+            // muroToolStripMenuItem
             // 
-            mnuPenna.Name = "mnuPenna";
-            mnuPenna.Size = new Size(52, 20);
-            mnuPenna.Text = "Penna";
-            mnuPenna.Click += mnuPenna_Click;
+            muroToolStripMenuItem.Name = "muroToolStripMenuItem";
+            muroToolStripMenuItem.Size = new Size(48, 20);
+            muroToolStripMenuItem.Text = "Muro";
+            muroToolStripMenuItem.Click += muroToolStripMenuItem_Click;
             // 
-            // mnuGomma
+            // inizioFineToolStripMenuItem
             // 
-            mnuGomma.Name = "mnuGomma";
-            mnuGomma.Size = new Size(62, 20);
-            mnuGomma.Text = "Gomma";
-            mnuGomma.Click += mnuGomma_Click;
+            inizioFineToolStripMenuItem.Name = "inizioFineToolStripMenuItem";
+            inizioFineToolStripMenuItem.Size = new Size(74, 20);
+            inizioFineToolStripMenuItem.Text = "Inizio/Fine";
+            inizioFineToolStripMenuItem.Click += inizioFineToolStripMenuItem_Click;
             // 
             // dlgSalva
             // 
@@ -138,9 +138,14 @@
             Controls.Add(lstSoluzioni);
             Controls.Add(pctLabirinto);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Form1";
             Text = "Form1";
+            KeyDown += Form1_KeyDown;
+            KeyUp += Form1_KeyUp;
             ((System.ComponentModel.ISupportInitialize)pctLabirinto).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -159,8 +164,8 @@
         private SaveFileDialog dlgSalva;
         private OpenFileDialog dlgApri;
         private ToolStripMenuItem cancellaToolStripMenuItem;
-        private ToolStripMenuItem mnuPenna;
-        private ToolStripMenuItem mnuGomma;
         private ColorDialog colorDialog1;
+        private ToolStripMenuItem muroToolStripMenuItem;
+        private ToolStripMenuItem inizioFineToolStripMenuItem;
     }
 }

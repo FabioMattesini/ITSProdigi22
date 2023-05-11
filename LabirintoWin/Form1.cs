@@ -1,3 +1,5 @@
+using System;
+
 namespace LabirintoWin
 {
     public partial class Form1 : Form
@@ -6,6 +8,8 @@ namespace LabirintoWin
         Pen tratto = new Pen(Color.Black, 20);
         private int numeroCelle = 15;
         private bool[,] scacchiera;
+        private bool disegnaMuro = true;
+        private bool disegnaInizio = false;
 
         public Form1()
         {
@@ -19,49 +23,68 @@ namespace LabirintoWin
 
         private void pctLabirinto_MouseMove(object sender, MouseEventArgs e)
         {
-            //Point attuale = new Point(e.X, e.Y);
-            //lstSoluzioni.Items.Clear();
-            //lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
-            //if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
-            //{
-            //    Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
-            //    pennello.DrawLine(tratto, attuale, precedente);
-            //    pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
-            //}
-            //precedente = attuale;
-
             Point attuale = new Point(e.X, e.Y);
             lstSoluzioni.Items.Clear();
             lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
             int rectangleWidth = pctLabirinto.Width / numeroCelle; //dimensioni del rettangolo
             int rectangleHeight = pctLabirinto.Height / numeroCelle;
-            if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
+            int gridX = attuale.X / rectangleWidth; //divido la posizione attuale per la dimensione del rettangolo e poi rimoltiplico di nuovo per questa per ottenere un quadrato che coincide con la griglia
+            int gridY = attuale.Y / rectangleHeight;
+            Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
+            Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
+            Brush brush = new SolidBrush(Color.Black);
+
+            if (e.Button == MouseButtons.Left && disegnaMuro) //se il tasto sinistro del mouse è premuto
             {
-                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
-                int gridX = attuale.X / rectangleWidth; //divido la posizione attuale per la dimensione del rettangolo e poi rimoltiplico di nuovo per questa per ottenere un quadrato che coincide con la griglia
-                int gridY = attuale.Y / rectangleHeight;
-                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
-                Brush b = new SolidBrush(Color.Black);
-                pennello.FillRectangle(b, rettangolo);
                 scacchiera[gridX, gridY] = true;
-                pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
+                pennello.FillRectangle(brush, rettangolo);
             }
-            else if (e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right && disegnaMuro)
             {
-                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
-                int gridX = attuale.X / rectangleWidth; //divido la posizione attuale per la dimensione del rettangolo e poi rimoltiplico di nuovo per questa per ottenere un quadrato che coincide con la griglia
-                int gridY = attuale.Y / rectangleHeight;
-                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
-                Brush b = new SolidBrush(Color.White);
-                pennello.FillRectangle(b, rettangolo);
+                brush = new SolidBrush(Color.White);
                 scacchiera[gridX, gridY] = false;
-                pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
+                pennello.FillRectangle(brush, rettangolo);
             }
+
+            pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
             precedente = attuale;
         }
 
         private void pctLabirinto_MouseClick(object sender, MouseEventArgs e)
         {
+            Point attuale = new Point(e.X, e.Y);
+            int rectangleWidth = pctLabirinto.Width / numeroCelle; //dimensioni del rettangolo
+            int rectangleHeight = pctLabirinto.Height / numeroCelle;
+            if (e.Button == MouseButtons.Left && !disegnaMuro) //inserisco l'inizio del percorso
+            {
+                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
+                int gridX = attuale.X / rectangleWidth;
+                int gridY = attuale.Y / rectangleHeight;
+                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
+                Brush b = new SolidBrush(Color.Green);
+                pennello.FillRectangle(b, rettangolo);
+                pctLabirinto.Invalidate();
+            }
+            else if (e.Button == MouseButtons.Right && !disegnaMuro)
+            {
+                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
+                int gridX = attuale.X / rectangleWidth;
+                int gridY = attuale.Y / rectangleHeight;
+                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
+                Brush b = new SolidBrush(Color.Red);
+                pennello.FillRectangle(b, rettangolo);
+                pctLabirinto.Invalidate();
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+
         }
 
         private void mnuSalva_Click(object sender, EventArgs e)
@@ -98,6 +121,16 @@ namespace LabirintoWin
         {
             tratto.Color = Color.White;
             tratto.Width = 20;
+        }
+
+        private void muroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            disegnaMuro = true;
+        }
+
+        private void inizioFineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            disegnaMuro = false;
         }
     }
 }
