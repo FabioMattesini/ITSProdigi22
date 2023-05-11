@@ -25,8 +25,8 @@ namespace LabirintoWin
         private void pctLabirinto_MouseMove(object sender, MouseEventArgs e)
         {
             Point attuale = new Point(e.X, e.Y);
-            lstSoluzioni.Items.Clear();
-            lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
+            //lstSoluzioni.Items.Clear();
+            //lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
             int rectangleWidth = pctLabirinto.Width / numeroCelle; //dimensioni del rettangolo
             int rectangleHeight = pctLabirinto.Height / numeroCelle;
             int gridX = attuale.X / rectangleWidth; //divido la posizione attuale per la dimensione del rettangolo e poi rimoltiplico di nuovo per questa per ottenere un quadrato che coincide con la griglia
@@ -142,21 +142,37 @@ namespace LabirintoWin
 
         private void btnRisolvi_Click(object sender, EventArgs e)
         {
-            scansiona(scacchiera, inizio, fine);
+            scansiona(scacchiera, inizio, fine, new List<Point>());
         }
 
         private void scansiona(bool[,] labirinto, Point start, Point finish, List<Point> percorso = null) //tengo una lista del percorso
         {
             if (start == finish)
             {
-                lstSoluzioni.Items.Add(percorso);
+                lstSoluzioni.Items.Add($"Percorso:");
+                foreach (Point p in percorso)
+                {
+                    lstSoluzioni.Items.Add($"X:{p.X} - Y:{p.Y}");
+                }
             }
             else
             {
-                Point? top = start.Y - 1 >= 0 ? new Point(start.X, start.Y - 1) : null; //con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
-                Point? sx = start.X - 1 >= 0 ? new Point(start.X - 1, start.Y) : null;
-                Point? dx = new Point(start.X + 1, start.Y);
-                Point? bottom = new Point(start.X, start.Y + 1);
+                percorso.Add(start);
+                //creo una lista di possibili caselle da esplorare, cioè quelle adiacenti
+                List<Point?> possibilita = new List<Point?>() {//con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
+                    start.Y - 1 >= 0 ? new Point(start.X, start.Y - 1) : null, //top
+                    start.X - 1 >= 0 ? new Point(start.X - 1, start.Y) : null, //left
+                    start.X + 1 < numeroCelle ? new Point(start.X + 1, start.Y) : null, //right
+                    start.Y + 1 < numeroCelle ? new Point(start.X, start.Y + 1) : null //bottom
+                };
+                
+                foreach (Point? p in possibilita)
+                {
+                    if(p.HasValue && !labirinto[p.Value.X, p.Value.Y] && !percorso.Contains(p.Value))//se la cella considerata non è un muro e non l'ho già esplorata la scansiono
+                    {
+                        scansiona(labirinto, p.Value, finish, percorso);
+                    }
+                }
             }
         }
     }
