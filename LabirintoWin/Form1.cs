@@ -16,25 +16,22 @@ namespace LabirintoWin
 
         private void pctLabirinto_MouseMove(object sender, MouseEventArgs e)
         {
-            Point attuale = new Point(e.X, e.Y);
-            lstSoluzioni.Items.Clear();
-            lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
-            if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
-            {
-                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
-                pennello.DrawLine(tratto, attuale, precedente);
-                pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
-            }
-            precedente = attuale;
-        }
+            //Point attuale = new Point(e.X, e.Y);
+            //lstSoluzioni.Items.Clear();
+            //lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
+            //if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
+            //{
+            //    Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
+            //    pennello.DrawLine(tratto, attuale, precedente);
+            //    pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
+            //}
+            //precedente = attuale;
 
-        private void pctLabirinto_MouseClick(object sender, MouseEventArgs e)
-        {
             Point attuale = new Point(e.X, e.Y);
             lstSoluzioni.Items.Clear();
             lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
-            int numeroCelle = 10;
-            int rectangleWidth = pctLabirinto.Width / numeroCelle;
+            int numeroCelle = 15;
+            int rectangleWidth = pctLabirinto.Width / numeroCelle; //dimensioni del rettangolo
             int rectangleHeight = pctLabirinto.Height / numeroCelle;
             if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
             {
@@ -44,10 +41,14 @@ namespace LabirintoWin
                 Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
                 Brush b = new SolidBrush(Color.Black);
                 pennello.FillRectangle(b, rettangolo);
-                //pennello.DrawRectangle(new Pen(Color.Black, 1), rettangolo);
+                //pennello.DrawRectangle(new Pen(Color.Black, 1), rettangolo); //disegna un rettangolo vuoto
                 pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
             }
             precedente = attuale;
+        }
+
+        private void pctLabirinto_MouseClick(object sender, MouseEventArgs e)
+        {
         }
 
         private void mnuSalva_Click(object sender, EventArgs e)
