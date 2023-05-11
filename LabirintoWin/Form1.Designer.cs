@@ -49,7 +49,7 @@
             pctLabirinto.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pctLabirinto.Location = new Point(12, 40);
             pctLabirinto.Name = "pctLabirinto";
-            pctLabirinto.Size = new Size(643, 536);
+            pctLabirinto.Size = new Size(500, 500);
             pctLabirinto.TabIndex = 0;
             pctLabirinto.TabStop = false;
             pctLabirinto.MouseClick += pctLabirinto_MouseClick;
@@ -61,9 +61,9 @@
             lstSoluzioni.FormattingEnabled = true;
             lstSoluzioni.IntegralHeight = false;
             lstSoluzioni.ItemHeight = 15;
-            lstSoluzioni.Location = new Point(693, 40);
+            lstSoluzioni.Location = new Point(565, 40);
             lstSoluzioni.Name = "lstSoluzioni";
-            lstSoluzioni.Size = new Size(686, 536);
+            lstSoluzioni.Size = new Size(814, 500);
             lstSoluzioni.TabIndex = 1;
             // 
             // btnRisolvi

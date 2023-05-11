@@ -6,7 +6,7 @@ namespace LabirintoWin
     {
         private Point precedente = new Point(0, 0);
         Pen tratto = new Pen(Color.Black, 20);
-        private int numeroCelle = 15;
+        private int numeroCelle = 10;
         private bool[,] scacchiera;
         private bool disegnaMuro = true;
         private bool disegnaInizio = false;
