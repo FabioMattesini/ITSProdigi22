@@ -75,6 +75,7 @@
             btnRisolvi.TabIndex = 2;
             btnRisolvi.Text = "Risolvi";
             btnRisolvi.UseVisualStyleBackColor = true;
+            btnRisolvi.Click += btnRisolvi_Click;
             // 
             // menuStrip1
             // 

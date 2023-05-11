@@ -9,8 +9,8 @@ namespace LabirintoWin
         private int numeroCelle = 10;
         private bool[,] scacchiera;
         private bool disegnaMuro = true;
-        private Point inizio = new Point(0, 0);
-        private Point fine = new Point(0, 0);
+        private Point inizio;
+        private Point fine;
 
         public Form1()
         {
@@ -138,6 +138,26 @@ namespace LabirintoWin
         private void inizioFineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             disegnaMuro = false;
+        }
+
+        private void btnRisolvi_Click(object sender, EventArgs e)
+        {
+            scansiona(scacchiera, inizio, fine);
+        }
+
+        private void scansiona(bool[,] labirinto, Point start, Point finish, List<Point> percorso = null) //tengo una lista del percorso
+        {
+            if (start == finish)
+            {
+                lstSoluzioni.Items.Add(percorso);
+            }
+            else
+            {
+                Point? top = start.Y - 1 > 0 ? new Point(start.X, start.Y - 1) : null; //con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
+                Point? sx = start.X - 1 > 0 ? new Point(start.X - 1, start.Y) : null;
+                Point? dx = new Point(start.X + 1, start.Y);
+                Point? bottom = new Point(start.X, start.Y + 1);
+            }
         }
     }
 }
