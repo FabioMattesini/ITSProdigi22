@@ -63,15 +63,15 @@
             lstSoluzioni.ItemHeight = 15;
             lstSoluzioni.Location = new Point(565, 40);
             lstSoluzioni.Name = "lstSoluzioni";
-            lstSoluzioni.Size = new Size(814, 500);
+            lstSoluzioni.Size = new Size(360, 500);
             lstSoluzioni.TabIndex = 1;
             // 
             // btnRisolvi
             // 
             btnRisolvi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnRisolvi.Location = new Point(12, 582);
+            btnRisolvi.Location = new Point(12, 571);
             btnRisolvi.Name = "btnRisolvi";
-            btnRisolvi.Size = new Size(1367, 39);
+            btnRisolvi.Size = new Size(913, 39);
             btnRisolvi.TabIndex = 2;
             btnRisolvi.Text = "Risolvi";
             btnRisolvi.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuSalva, mnuApri, cancellaToolStripMenuItem, muroToolStripMenuItem, inizioFineToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1391, 24);
+            menuStrip1.Size = new Size(937, 24);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -133,7 +133,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1391, 622);
+            ClientSize = new Size(937, 622);
             Controls.Add(btnRisolvi);
             Controls.Add(lstSoluzioni);
             Controls.Add(pctLabirinto);

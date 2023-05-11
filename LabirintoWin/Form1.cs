@@ -9,7 +9,8 @@ namespace LabirintoWin
         private int numeroCelle = 10;
         private bool[,] scacchiera;
         private bool disegnaMuro = true;
-        private bool disegnaInizio = false;
+        private Point inizio = new Point(0, 0);
+        private Point fine = new Point(0, 0);
 
         public Form1()
         {
@@ -36,14 +37,22 @@ namespace LabirintoWin
 
             if (e.Button == MouseButtons.Left && disegnaMuro) //se il tasto sinistro del mouse è premuto
             {
-                scacchiera[gridX, gridY] = true;
-                pennello.FillRectangle(brush, rettangolo);
+                try
+                {
+                    scacchiera[gridX, gridY] = true;
+                    pennello.FillRectangle(brush, rettangolo);
+                }
+                catch { }
             }
             else if (e.Button == MouseButtons.Right && disegnaMuro)
             {
                 brush = new SolidBrush(Color.White);
-                scacchiera[gridX, gridY] = false;
-                pennello.FillRectangle(brush, rettangolo);
+                try
+                {
+                    scacchiera[gridX, gridY] = false;
+                    pennello.FillRectangle(brush, rettangolo);
+                }
+                catch { }
             }
 
             pctLabirinto.Invalidate(); //forza la PictureBox ad aggiornarsi
@@ -55,26 +64,24 @@ namespace LabirintoWin
             Point attuale = new Point(e.X, e.Y);
             int rectangleWidth = pctLabirinto.Width / numeroCelle; //dimensioni del rettangolo
             int rectangleHeight = pctLabirinto.Height / numeroCelle;
+            Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
+            int gridX = attuale.X / rectangleWidth;
+            int gridY = attuale.Y / rectangleHeight;
+            Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
+            Brush brush = new SolidBrush(Color.Green);
+
             if (e.Button == MouseButtons.Left && !disegnaMuro) //inserisco l'inizio del percorso
             {
-                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
-                int gridX = attuale.X / rectangleWidth;
-                int gridY = attuale.Y / rectangleHeight;
-                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
-                Brush b = new SolidBrush(Color.Green);
-                pennello.FillRectangle(b, rettangolo);
-                pctLabirinto.Invalidate();
+                pennello.FillRectangle(brush, rettangolo);
+                inizio = new Point(gridX, gridY);
             }
             else if (e.Button == MouseButtons.Right && !disegnaMuro)
             {
-                Graphics pennello = Graphics.FromImage(pctLabirinto.Image);
-                int gridX = attuale.X / rectangleWidth;
-                int gridY = attuale.Y / rectangleHeight;
-                Rectangle rettangolo = new Rectangle(gridX * rectangleWidth, gridY * rectangleHeight, rectangleWidth, rectangleHeight);
-                Brush b = new SolidBrush(Color.Red);
-                pennello.FillRectangle(b, rettangolo);
-                pctLabirinto.Invalidate();
+                brush = new SolidBrush(Color.Red);
+                pennello.FillRectangle(brush, rettangolo);
+                fine = new Point(gridX, gridY);
             }
+            pctLabirinto.Invalidate();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
