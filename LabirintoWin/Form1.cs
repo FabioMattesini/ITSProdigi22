@@ -4,6 +4,8 @@ namespace LabirintoWin
     {
         private Point precedente = new Point(0, 0);
         Pen tratto = new Pen(Color.Black, 20);
+        private int numeroCelle = 15;
+        private bool[,] scacchiera;
 
         public Form1()
         {
@@ -12,6 +14,7 @@ namespace LabirintoWin
             pctLabirinto.Image = nuova;
             Graphics pennello = Graphics.FromImage(pctLabirinto.Image); //prendo il pennello per disegnare sull'immagine del labirinto
             pennello.Clear(Color.White);
+            scacchiera = new bool[numeroCelle, numeroCelle]; 
         }
 
         private void pctLabirinto_MouseMove(object sender, MouseEventArgs e)
@@ -30,7 +33,6 @@ namespace LabirintoWin
             Point attuale = new Point(e.X, e.Y);
             lstSoluzioni.Items.Clear();
             lstSoluzioni.Items.Add($"{e.Location}\t{e.Button}");
-            int numeroCelle = 15;
             int rectangleWidth = pctLabirinto.Width / numeroCelle; //dimensioni del rettangolo
             int rectangleHeight = pctLabirinto.Height / numeroCelle;
             if (e.Button == MouseButtons.Left) //se il tasto sinistro del mouse è premuto
