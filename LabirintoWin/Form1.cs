@@ -153,8 +153,8 @@ namespace LabirintoWin
             }
             else
             {
-                Point? top = start.Y - 1 > 0 ? new Point(start.X, start.Y - 1) : null; //con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
-                Point? sx = start.X - 1 > 0 ? new Point(start.X - 1, start.Y) : null;
+                Point? top = start.Y - 1 >= 0 ? new Point(start.X, start.Y - 1) : null; //con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
+                Point? sx = start.X - 1 >= 0 ? new Point(start.X - 1, start.Y) : null;
                 Point? dx = new Point(start.X + 1, start.Y);
                 Point? bottom = new Point(start.X, start.Y + 1);
             }
