@@ -29,5 +29,10 @@ namespace RubricaWin
             daModificare.telefono = txtModTelefono.Text;
             this.Close();
         }
+
+        private void txtModNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

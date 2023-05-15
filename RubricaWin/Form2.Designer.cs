@@ -43,6 +43,7 @@
             txtModNome.Name = "txtModNome";
             txtModNome.Size = new Size(151, 23);
             txtModNome.TabIndex = 0;
+            txtModNome.TextChanged += txtModNome_TextChanged;
             // 
             // txtModCognome
             // 
