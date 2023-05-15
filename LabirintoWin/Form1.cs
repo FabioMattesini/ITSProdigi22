@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace LabirintoWin
 {
@@ -142,38 +143,77 @@ namespace LabirintoWin
 
         private void btnRisolvi_Click(object sender, EventArgs e)
         {
-            scansiona(scacchiera, inizio, fine, new List<Point>());
+            scansiona(scacchiera, inizio, fine, 50, new List<Point>());
         }
 
-        private void scansiona(bool[,] labirinto, Point start, Point finish, List<Point> percorso = null) //tengo una lista del percorso
+        /// <summary>
+        /// Metodo che trova le possibili soluzioni del labirinto
+        /// </summary>
+        /// <param name="labirinto"></param>
+        /// <param name="start"></param>
+        /// <param name="finish"></param>
+        /// <param name="percorso"></param>
+        private void scansiona(bool[,] labirinto, Point start, Point finish, int lunghezzaMassima, List<Point> percorso = null, int profondita = 0) //tengo una lista del percorso
         {
             if (start == finish)
             {
-                lstSoluzioni.Items.Add($"Percorso:");
-                foreach (Point p in percorso)
-                {
-                    lstSoluzioni.Items.Add($"X:{p.X} - Y:{p.Y}");
-                }
+                //lstSoluzioni.Items.Add($"Percorso:");
+                //foreach (Point p in percorso)
+                //{
+                //    lstSoluzioni.Items.Add($"X:{p.X} - Y:{p.Y}");
+                //}
+
+                lstSoluzioni.Items.Add(percorso);
             }
             else
             {
-                percorso.Add(start);
-                //creo una lista di possibili caselle da esplorare, cioè quelle adiacenti
-                List<Point?> possibilita = new List<Point?>() {//con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
+                if(profondita < lunghezzaMassima) //la soluzione potrà avere al massimo 100 caselle
+                {
+                    percorso.Add(start);
+                    //creo una lista di possibili caselle da esplorare, cioè quelle adiacenti
+                    List<Point?> possibilita = new List<Point?>() {//con if in linea controllo se sto andando in una cella fuori dal labirinto, nel quale caso metto la cella a null
                     start.Y - 1 >= 0 ? new Point(start.X, start.Y - 1) : null, //top
                     start.X - 1 >= 0 ? new Point(start.X - 1, start.Y) : null, //left
                     start.X + 1 < numeroCelle ? new Point(start.X + 1, start.Y) : null, //right
                     start.Y + 1 < numeroCelle ? new Point(start.X, start.Y + 1) : null //bottom
                 };
-                
-                foreach (Point? p in possibilita)
-                {
-                    if(p.HasValue && !labirinto[p.Value.X, p.Value.Y] && !percorso.Contains(p.Value))//se la cella considerata non è un muro e non l'ho già esplorata la scansiono
+
+                    foreach (Point? p in possibilita)
                     {
-                        scansiona(labirinto, p.Value, finish, percorso);
+                        if (p.HasValue && !labirinto[p.Value.X, p.Value.Y] && !percorso.Contains(p.Value))//se la cella considerata non è un muro e non l'ho già esplorata la scansiono
+                        {
+                            List<Point> finoAdOra = new List<Point>(percorso); //faccio una copia del percorso e la passo al prossimo scansiona()
+                            profondita++;
+                            scansiona(labirinto, p.Value, finish, lunghezzaMassima, finoAdOra, profondita);
+                        }
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Metodo che stampa il contenuto del percorso selezionato in lstSoluzioni e colora di blu le caselle del percorso selezionato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstSoluzioni_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Point> percorso = lstSoluzioni.SelectedItem as List<Point>; //prendo il percorso selezionato dalla lista
+            txtPreview.Text = "";
+
+            Graphics penna = Graphics.FromImage(pctLabirinto.Image);
+            SolidBrush tratto = new SolidBrush(Color.Blue);
+
+            int cellaWidth = pctLabirinto.Width / numeroCelle;
+            int cellaHeight = pctLabirinto.Height / numeroCelle;
+
+            foreach (Point vertice in percorso)
+            {
+                txtPreview.Text += vertice.ToString();
+                penna.FillRectangle(tratto, vertice.X * cellaWidth, vertice.Y * cellaHeight, cellaWidth, cellaHeight);
+            }
+
+            pctLabirinto.Invalidate();
         }
     }
 }

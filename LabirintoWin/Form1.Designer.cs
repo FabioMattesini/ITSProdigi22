@@ -40,6 +40,7 @@
             dlgSalva = new SaveFileDialog();
             dlgApri = new OpenFileDialog();
             colorDialog1 = new ColorDialog();
+            txtPreview = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pctLabirinto).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -61,10 +62,11 @@
             lstSoluzioni.FormattingEnabled = true;
             lstSoluzioni.IntegralHeight = false;
             lstSoluzioni.ItemHeight = 15;
-            lstSoluzioni.Location = new Point(565, 40);
+            lstSoluzioni.Location = new Point(551, 40);
             lstSoluzioni.Name = "lstSoluzioni";
-            lstSoluzioni.Size = new Size(360, 500);
+            lstSoluzioni.Size = new Size(360, 232);
             lstSoluzioni.TabIndex = 1;
+            lstSoluzioni.SelectedIndexChanged += lstSoluzioni_SelectedIndexChanged;
             // 
             // btnRisolvi
             // 
@@ -130,11 +132,22 @@
             dlgApri.FileName = "openFileDialog1";
             dlgApri.Filter = "Immagine|*.jpg|Tutti i file|*.*";
             // 
+            // txtPreview
+            // 
+            txtPreview.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtPreview.Location = new Point(551, 306);
+            txtPreview.Multiline = true;
+            txtPreview.Name = "txtPreview";
+            txtPreview.ScrollBars = ScrollBars.Vertical;
+            txtPreview.Size = new Size(360, 234);
+            txtPreview.TabIndex = 4;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(937, 622);
+            Controls.Add(txtPreview);
             Controls.Add(btnRisolvi);
             Controls.Add(lstSoluzioni);
             Controls.Add(pctLabirinto);
@@ -168,5 +181,6 @@
         private ColorDialog colorDialog1;
         private ToolStripMenuItem muroToolStripMenuItem;
         private ToolStripMenuItem inizioFineToolStripMenuItem;
+        private TextBox txtPreview;
     }
 }
