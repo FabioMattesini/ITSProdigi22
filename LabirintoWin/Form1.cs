@@ -5,7 +5,8 @@ namespace LabirintoWin
 {
     public partial class Form1 : Form
     {
-        private Point precedente = new Point(0, 0);
+        Point precedente = new Point(0, 0);
+        private List<Point> vecchioPercorso;
         Pen tratto = new Pen(Color.Black, 20);
         private int numeroCelle = 10;
         private bool[,] scacchiera;
@@ -167,7 +168,7 @@ namespace LabirintoWin
             }
             else
             {
-                if(profondita < lunghezzaMassima) //la soluzione potrà avere al massimo 100 caselle
+                if(percorso.Count < lunghezzaMassima) //la soluzione potrà avere al massimo 100 caselle
                 {
                     percorso.Add(start);
                     //creo una lista di possibili caselle da esplorare, cioè quelle adiacenti
@@ -183,8 +184,8 @@ namespace LabirintoWin
                         if (p.HasValue && !labirinto[p.Value.X, p.Value.Y] && !percorso.Contains(p.Value))//se la cella considerata non è un muro e non l'ho già esplorata la scansiono
                         {
                             List<Point> finoAdOra = new List<Point>(percorso); //faccio una copia del percorso e la passo al prossimo scansiona()
-                            profondita++;
-                            scansiona(labirinto, p.Value, finish, lunghezzaMassima, finoAdOra, profondita);
+                            //profondita++;
+                            scansiona(labirinto, p.Value, finish, lunghezzaMassima, finoAdOra);
                         }
                     }
                 }
@@ -207,12 +208,21 @@ namespace LabirintoWin
             int cellaWidth = pctLabirinto.Width / numeroCelle;
             int cellaHeight = pctLabirinto.Height / numeroCelle;
 
+            if(vecchioPercorso != null)
+            {
+                foreach (Point vertice in vecchioPercorso) //cancello il percorso selezionato precedentemente
+                {
+                    penna.FillRectangle(new SolidBrush(Color.White), vertice.X * cellaWidth, vertice.Y * cellaHeight, cellaWidth, cellaHeight);
+                }
+            }
+            
             foreach (Point vertice in percorso)
             {
                 txtPreview.Text += vertice.ToString();
                 penna.FillRectangle(tratto, vertice.X * cellaWidth, vertice.Y * cellaHeight, cellaWidth, cellaHeight);
             }
 
+            vecchioPercorso = percorso;
             pctLabirinto.Invalidate();
         }
     }
