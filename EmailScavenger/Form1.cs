@@ -24,7 +24,7 @@ namespace EmailScavenger
                 MatchCollection links = Regex.Matches(corpo, pattern, RegexOptions.Multiline);
                 foreach (Match link in links) 
                 {
-                    string indirizzo = link.Groups[1].Value;
+                    string indirizzo = link.Groups[1].Value; //link.Groups[0] contiene "a href" e il contenuto dello stesso, link.Groups[1] contiene solo il contenuto del link
                     if(!indirizzo.StartsWith("http"))
                         indirizzo = url + indirizzo;
                     if(!lstRisultati.Items.Contains(indirizzo))
