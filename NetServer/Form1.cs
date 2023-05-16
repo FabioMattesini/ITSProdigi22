@@ -20,12 +20,12 @@ namespace NetServer
 
         private void btnAvvia_Click(object sender, EventArgs e)
         {
-            string command = "/C telnet localhost 80";
+            string command = $"/C telnet localhost {numPorta.Value}";
             System.Diagnostics.Process.Start("CMD.exe", command);
             btnCartella.Enabled = false;
             numPorta.Enabled = false;
             //costruisco il telefono
-            TcpListener telefono = new TcpListener(80); //creo un listener sulla porta 80
+            TcpListener telefono = new TcpListener((int)numPorta.Value); //creo un listener sulla porta 80
             //lo attacco al muro
             telefono.Start(); //avvio il listener 
             //mi metto in ascolto finchè qualcuno non si connette
@@ -37,7 +37,7 @@ namespace NetServer
             string comando;
             do
             {
-                invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\rComandi(carica, crea, elimina, visualizza)\n\r");
+                invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\rComandi(carica, crea, elimina, visualizza, orario)\n\r");
                 invia(cornetta, "Scrivi un comando:\n\r");
 
                 comando = ascolta(cornetta);
@@ -66,13 +66,29 @@ namespace NetServer
                         break;
 
                     case "visualizza":
+                        //invia(cornetta, $"{Directory.EnumerateFiles(txtPath.Text).Count()} file presenti\n\r");
+                        //foreach (string s in Directory.GetFiles(txtPath.Text))
+                        //{
+                        //    invia(cornetta, s + "\n\r");
+                        //}
+                      
                         invia(cornetta, $"{Directory.EnumerateFiles(txtPath.Text).Count()} file presenti\n\r");
-                        foreach (string s in Directory.GetFiles(txtPath.Text))
+                        if (Directory.EnumerateFiles(txtPath.Text).Count() > 0)
                         {
-                            invia(cornetta, s + "\n\r");
+                            string[] files = Directory.EnumerateFiles(txtPath.Text).ToArray();
+                            string listaFile = String.Join("\r\n ", files);
+                            invia(cornetta, listaFile);
                         }
+                        else
+                        {
+                            invia(cornetta, "Nessun file presente!");
+                        }
+
                         break;
 
+                    case "orario":
+                        invia(cornetta, DateTime.Now.ToShortTimeString());
+                        break;
 
                     default:
                         invia(cornetta, "Comando non riconosciuto!");
@@ -112,6 +128,10 @@ namespace NetServer
                 cornetta.Write(contenuto);
                 string contenutoFile = Encoding.ASCII.GetString(contenuto.ToArray());
                 lstRichieste.Items.Add(contenutoFile);
+            }
+            else
+            {
+                invia(cornetta, "Il file non esiste!");
             }
         }
 

@@ -43,9 +43,12 @@
             // 
             numPorta.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             numPorta.Location = new Point(668, 30);
+            numPorta.Maximum = new decimal(new int[] { 65536, 0, 0, 0 });
+            numPorta.Minimum = new decimal(new int[] { 80, 0, 0, 0 });
             numPorta.Name = "numPorta";
             numPorta.Size = new Size(120, 23);
             numPorta.TabIndex = 0;
+            numPorta.Value = new decimal(new int[] { 80, 0, 0, 0 });
             // 
             // btnAvvia
             // 
