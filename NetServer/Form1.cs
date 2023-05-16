@@ -31,17 +31,37 @@ namespace NetServer
             lstRichieste.Items.Add("Richiesta in ingresso!");
             //prendiamo il ricevitore per parlare e ascoltare
             NetworkStream cornetta = linea.GetStream(); //prendo il NetworkStream del TcpClient 
-            //mi presento
-            byte[] messaggio = Encoding.ASCII.GetBytes("TxtServer V1.0.0\n\rBenvenuto!\n\rComando:"); //codifico il messaggio in ASCII
-            cornetta.Write(messaggio); //scrivo il messaggio sul NetworKStream
-            //ascolto cosa mi chiede
 
-            string risposta = ascolta(cornetta);
+            string comando;
+            do
+            {
+                invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\rComando:");
 
-            parla(cornetta, risposta);
+                comando = ascolta(cornetta);
+                switch (comando)
+                {
+                    case "carica":
+                        invia(cornetta, "Quale file vuoi caricare?");
+                        string file = ascolta(cornetta);
+                        caricaFile(cornetta, file);
+                        break;
 
-            //riporto a schermo il messaggio del cliente
-            lstRichieste.Items.Add(risposta);
+                    case "crea":
+                        invia(cornetta, "Inserisci il nome del file da creare:");
+                        string daCreare = ascolta(cornetta);
+                        invia(cornetta, "Inserisci il testo del file:");
+                        string testo = ascolta(cornetta);
+                        creaFile(cornetta, daCreare, testo);
+                        invia(cornetta, "File creato!");
+                        break;
+
+                    default:
+                        invia(cornetta, "Comando non riconosciuto!");
+                        break;
+                }
+
+            } while (comando != "exit");
+
             //chiudo la telefonata
             linea.Close();
             //stacco il telefono dal muro
@@ -56,14 +76,14 @@ namespace NetServer
             do
             {
                 singolo = cornetta.ReadByte();
-                if (singolo > -1 && singolo != 13)
+                if (singolo > -1 && singolo != 13 && singolo != 10)
                     buffer.Add((byte)singolo);
             } while (singolo > -1 && singolo != 13);
             string risposta = Encoding.ASCII.GetString(buffer.ToArray());
             return risposta;
         }
 
-        private void parla(NetworkStream cornetta, string risposta)
+        private void caricaFile(NetworkStream cornetta, string risposta)
         {
             string percorso = txtPath.Text;
             string percorsoFile = Path.Combine(percorso, risposta);
@@ -71,7 +91,23 @@ namespace NetServer
             {
                 byte[] contenuto = File.ReadAllBytes(percorsoFile);
                 cornetta.Write(contenuto);
+                string contenutoFile = Encoding.ASCII.GetString(contenuto.ToArray());
+                lstRichieste.Items.Add(contenutoFile);
             }
+        }
+
+        private void creaFile(NetworkStream cornetta, string nomeFile, string testo)
+        {
+
+            string percorsoFile = Path.Combine(txtPath.Text, nomeFile);
+            File.WriteAllText(percorsoFile, testo);
+
+        }
+
+        private void invia(NetworkStream cornetta, string domanda)
+        {
+            byte[] messaggio = Encoding.ASCII.GetBytes(domanda);//codifico il messaggio in ASCII
+            cornetta.Write(messaggio);//scrivo il messaggio sul NetworKStream
         }
     }
 }
