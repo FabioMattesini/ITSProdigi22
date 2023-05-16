@@ -62,6 +62,16 @@ namespace NetServer
                         invia(cornetta, "File eliminato!");
                         break;
 
+                    case "visualizza":
+                        invia(cornetta, $"Elenco file in {txtPath.Text}\n\r");
+                        foreach (string s in Directory.GetFiles(txtPath.Text))
+                        {
+                            invia(cornetta, s + "\n\r");
+                        }
+                        break;
+
+
+
                     default:
                         invia(cornetta, "Comando non riconosciuto!");
                         break;
