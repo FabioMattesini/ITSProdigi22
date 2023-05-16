@@ -20,6 +20,8 @@ namespace NetServer
 
         private void btnAvvia_Click(object sender, EventArgs e)
         {
+            string command = "/C telnet localhost 80";
+            System.Diagnostics.Process.Start("CMD.exe", command);
             btnCartella.Enabled = false;
             numPorta.Enabled = false;
             //costruisco il telefono
@@ -69,7 +71,6 @@ namespace NetServer
                             invia(cornetta, s + "\n\r");
                         }
                         break;
-
 
 
 
