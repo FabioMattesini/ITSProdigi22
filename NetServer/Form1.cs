@@ -35,24 +35,11 @@ namespace NetServer
             byte[] messaggio = Encoding.ASCII.GetBytes("TxtServer V1.0.0\n\rBenvenuto!\n\rComando:");
             cornetta.Write(messaggio);
             //ascolto cosa mi chiede
-            List<byte> buffer = new();
-            int singolo;
-            do
-            {
-                singolo = cornetta.ReadByte();
-                if(singolo > -1 && singolo != 13)
-                    buffer.Add((byte)singolo);
-            }while(singolo > -1 && singolo != 13);
-            //potrebbe essere un file.txt
-            string risposta = Encoding.ASCII.GetString(buffer.ToArray());
 
-            string percorso = txtPath.Text;
-            string percorsoFile = Path.Combine(percorso, risposta);
-            if (File.Exists(percorsoFile))
-            {
-                byte[] contenuto = File.ReadAllBytes(percorsoFile);
-                cornetta.Write(contenuto);
-            }
+
+            string risposta = ascolta(cornetta);
+
+            parla(cornetta, risposta);
 
             //riporto a schermo il messaggio del cliente
             lstRichieste.Items.Add(risposta);
@@ -61,6 +48,31 @@ namespace NetServer
             //stacco il telefono dal muro
             telefono.Stop();
             lstRichieste.Items.Add("Richiesta terminata!");
+        }
+
+        private string ascolta(NetworkStream cornetta)
+        {
+            List<byte> buffer = new();
+            int singolo;
+            do
+            {
+                singolo = cornetta.ReadByte();
+                if (singolo > -1 && singolo != 13)
+                    buffer.Add((byte)singolo);
+            } while (singolo > -1 && singolo != 13);
+            string risposta = Encoding.ASCII.GetString(buffer.ToArray());
+            return risposta;
+        }
+
+        private void parla(NetworkStream cornetta, string risposta)
+        {
+            string percorso = txtPath.Text;
+            string percorsoFile = Path.Combine(percorso, risposta);
+            if (File.Exists(percorsoFile))
+            {
+                byte[] contenuto = File.ReadAllBytes(percorsoFile);
+                cornetta.Write(contenuto);
+            }
         }
     }
 }
