@@ -23,19 +23,18 @@ namespace NetServer
             btnCartella.Enabled = false;
             numPorta.Enabled = false;
             //costruisco il telefono
-            TcpListener telefono = new TcpListener(80);
+            TcpListener telefono = new TcpListener(80); //creo un listener sulla porta 80
             //lo attacco al muro
-            telefono.Start();
+            telefono.Start(); //avvio il listener 
             //mi metto in ascolto finchè qualcuno non si connette
-            TcpClient linea = telefono.AcceptTcpClient();
+            TcpClient linea = telefono.AcceptTcpClient(); //accetto una richiesta del client e lo "salvo" in un oggetto TcpClient
             lstRichieste.Items.Add("Richiesta in ingresso!");
             //prendiamo il ricevitore per parlare e ascoltare
-            NetworkStream cornetta = linea.GetStream();
+            NetworkStream cornetta = linea.GetStream(); //prendo il NetworkStream del TcpClient 
             //mi presento
-            byte[] messaggio = Encoding.ASCII.GetBytes("TxtServer V1.0.0\n\rBenvenuto!\n\rComando:");
-            cornetta.Write(messaggio);
+            byte[] messaggio = Encoding.ASCII.GetBytes("TxtServer V1.0.0\n\rBenvenuto!\n\rComando:"); //codifico il messaggio in ASCII
+            cornetta.Write(messaggio); //scrivo il messaggio sul NetworKStream
             //ascolto cosa mi chiede
-
 
             string risposta = ascolta(cornetta);
 
