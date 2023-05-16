@@ -51,8 +51,15 @@ namespace NetServer
                         string daCreare = ascolta(cornetta);
                         invia(cornetta, "Inserisci il testo del file:");
                         string testo = ascolta(cornetta);
-                        creaFile(cornetta, daCreare, testo);
+                        creaFile(daCreare, testo);
                         invia(cornetta, "File creato!");
+                        break;
+
+                    case "elimina":
+                        invia(cornetta, "Inserisci il nome del file da eliminare");
+                        string daEliminare = ascolta(cornetta);
+                        eliminaFile(daEliminare);
+                        invia(cornetta, "File eliminato!");
                         break;
 
                     default:
@@ -96,12 +103,19 @@ namespace NetServer
             }
         }
 
-        private void creaFile(NetworkStream cornetta, string nomeFile, string testo)
+        private void creaFile(string nomeFile, string testo)
         {
-
             string percorsoFile = Path.Combine(txtPath.Text, nomeFile);
             File.WriteAllText(percorsoFile, testo);
+        }
 
+        private void eliminaFile(string nomeFile)
+        {
+            string percorsoFile = Path.Combine(txtPath.Text, nomeFile);
+            if (File.Exists(percorsoFile))
+            {
+                File.Delete(percorsoFile);
+            }
         }
 
         private void invia(NetworkStream cornetta, string domanda)
