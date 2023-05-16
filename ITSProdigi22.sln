@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloccoNote", "BloccoNote\Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabirintoWin", "LabirintoWin\LabirintoWin.csproj", "{A1C55001-1848-4CDF-A36D-8839C720A2F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailScavenger", "EmailScavenger\EmailScavenger.csproj", "{1D8E47BD-E592-4437-9260-68281D19F431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailScavenger", "EmailScavenger\EmailScavenger.csproj", "{1D8E47BD-E592-4437-9260-68281D19F431}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetServer", "NetServer\NetServer.csproj", "{FF6DE885-04ED-4C5A-BC8C-740BE332955E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{1D8E47BD-E592-4437-9260-68281D19F431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D8E47BD-E592-4437-9260-68281D19F431}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D8E47BD-E592-4437-9260-68281D19F431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6DE885-04ED-4C5A-BC8C-740BE332955E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6DE885-04ED-4C5A-BC8C-740BE332955E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6DE885-04ED-4C5A-BC8C-740BE332955E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6DE885-04ED-4C5A-BC8C-740BE332955E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
