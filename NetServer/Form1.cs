@@ -37,7 +37,8 @@ namespace NetServer
             string comando;
             do
             {
-                invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\rComando:");
+                invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\rComandi(carica, crea, elimina, visualizza)\n\r");
+                invia(cornetta, "Scrivi un comando:\n\r");
 
                 comando = ascolta(cornetta);
                 switch (comando)
@@ -58,20 +59,19 @@ namespace NetServer
                         break;
 
                     case "elimina":
-                        invia(cornetta, "Inserisci il nome del file da eliminare");
+                        invia(cornetta, "Inserisci il nome del file da eliminare:");
                         string daEliminare = ascolta(cornetta);
                         eliminaFile(daEliminare);
                         invia(cornetta, "File eliminato!");
                         break;
 
                     case "visualizza":
-                        invia(cornetta, $"Elenco file in {txtPath.Text}\n\r");
+                        invia(cornetta, $"{Directory.EnumerateFiles(txtPath.Text).Count()} file presenti\n\r");
                         foreach (string s in Directory.GetFiles(txtPath.Text))
                         {
                             invia(cornetta, s + "\n\r");
                         }
                         break;
-
 
 
                     default:
@@ -95,7 +95,7 @@ namespace NetServer
             do
             {
                 singolo = cornetta.ReadByte();
-                if (singolo > -1 && singolo != 13 && singolo != 10)
+                if (singolo > -1 && singolo != 13 && singolo != 10 && singolo != 8)
                     buffer.Add((byte)singolo);
             } while (singolo > -1 && singolo != 13);
             string risposta = Encoding.ASCII.GetString(buffer.ToArray());
