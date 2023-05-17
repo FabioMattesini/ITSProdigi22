@@ -167,18 +167,31 @@ namespace NetServer
             cornetta.Write(messaggio);//scrivo il messaggio sul NetworKStream
         }
 
+        private string chiedi(NetworkStream cornetta, string domanda)
+        {
+            invia(cornetta, domanda);
+            return ascolta(cornetta);
+        }
+
         private void esegui(NetworkStream cornetta)
         {
-            invia(cornetta, "Comando da eseguire:\n\r");
-            string programma = ascolta(cornetta);
-            invia(cornetta, "Con quali parametri?\n\r");
-            string parametri = ascolta(cornetta);
+            string programma = chiedi(cornetta, "Comando da eseguire:\n\r");
+            string parametri = chiedi(cornetta, "Con quali parametri?\n\r");
             Process cmd = new Process();
             cmd.StartInfo.FileName = programma; //specifico il programma da eseguire
             cmd.StartInfo.Arguments = parametri; //specifico i parametri
             cmd.StartInfo.RedirectStandardOutput = true; //ridirezione l'output sullo standard output
-            cmd.Start();
-            string risultato = cmd.StandardOutput.ReadToEnd(); //leggo l'output dell'applicazione
+            string risultato = "Comando non esistente!";
+            try
+            {
+                cmd.Start();
+                risultato = cmd.StandardOutput.ReadToEnd(); //leggo l'output dell'applicazione
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
             invia(cornetta, risultato);
         }
     }
