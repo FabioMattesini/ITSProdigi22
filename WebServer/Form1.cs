@@ -31,6 +31,7 @@ namespace WebServer
             {
                 HttpListenerContext richiesta = server.GetContext(); //aspetto una richiesta
                 Stream cornetta = richiesta.Response.OutputStream;
+
                 caricaPagina(richiesta.Request.RawUrl, cornetta);
 
                 richiesta.Response.OutputStream.Close();
@@ -65,17 +66,24 @@ namespace WebServer
             }
             else if (File.Exists(percorsoFile))
             {
-                //byte[] contenuto = File.ReadAllBytes(percorsoFile);
-                //cornetta.Write(contenuto);
-                Process interpretePHP = new Process();
-                interpretePHP.StartInfo.FileName = @"c:\xampp\php\php.exe"; //la @ serve per intepretare correttamente gli slash
-                interpretePHP.StartInfo.Arguments = percorsoFile;
-                interpretePHP.StartInfo.RedirectStandardOutput = true;
-                interpretePHP.StartInfo.CreateNoWindow = true;
-                interpretePHP.Start();
+                if (percorsoFile.EndsWith(".php"))
+                {
+                    Process interpretePHP = new Process();
+                    interpretePHP.StartInfo.FileName = @"c:\xampp\php\php.exe"; //la @ serve per intepretare correttamente gli slash
+                    interpretePHP.StartInfo.Arguments = percorsoFile;
+                    interpretePHP.StartInfo.RedirectStandardOutput = true;
+                    interpretePHP.StartInfo.CreateNoWindow = true;
+                    interpretePHP.Start();
 
-                string testoElaborato = interpretePHP.StandardOutput.ReadToEnd();
-                cornetta.Write(Encoding.UTF8.GetBytes(testoElaborato));
+                    string testoElaborato = interpretePHP.StandardOutput.ReadToEnd();
+                    cornetta.Write(Encoding.UTF8.GetBytes(testoElaborato));
+                }
+                else
+                {
+                    byte[] contenuto = File.ReadAllBytes(percorsoFile);
+                    cornetta.Write(contenuto);
+                }
+
                 cornetta.Close();
             }
             else

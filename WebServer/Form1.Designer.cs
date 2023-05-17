@@ -33,6 +33,7 @@
             txtPath = new TextBox();
             btnCartella = new Button();
             btnStop = new Button();
+            lstRichieste = new ListBox();
             SuspendLayout();
             // 
             // btnAvvia
@@ -73,11 +74,21 @@
             btnStop.UseVisualStyleBackColor = true;
             btnStop.Click += btnStop_Click;
             // 
+            // lstRichieste
+            // 
+            lstRichieste.FormattingEnabled = true;
+            lstRichieste.ItemHeight = 15;
+            lstRichieste.Location = new Point(244, 270);
+            lstRichieste.Name = "lstRichieste";
+            lstRichieste.Size = new Size(276, 139);
+            lstRichieste.TabIndex = 4;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lstRichieste);
             Controls.Add(btnStop);
             Controls.Add(btnCartella);
             Controls.Add(txtPath);
@@ -95,5 +106,6 @@
         private TextBox txtPath;
         private Button btnCartella;
         private Button btnStop;
+        private ListBox lstRichieste;
     }
 }
