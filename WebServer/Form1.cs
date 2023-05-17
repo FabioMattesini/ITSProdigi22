@@ -34,7 +34,7 @@ namespace WebServer
                 caricaPagina(richiesta.Request.RawUrl, cornetta);
 
                 richiesta.Response.OutputStream.Close();
-            } while (isAttivato);
+            } while (server.IsListening);
 
             server.Close();
         }
