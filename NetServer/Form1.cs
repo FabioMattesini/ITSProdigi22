@@ -42,7 +42,7 @@ namespace NetServer
             do
             {
                 
-                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, esegui, orario)\n\r");
+                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, esegui, php, orario)\n\r");
 
                 comando = ascolta(cornetta);
                 switch (comando)
@@ -92,6 +92,10 @@ namespace NetServer
 
                     case "esegui":
                         esegui(cornetta);
+                        break;
+
+                    case "php":
+                        eseguiPHP(cornetta);
                         break;
 
                     case "orario":
@@ -193,6 +197,19 @@ namespace NetServer
             }
             
             invia(cornetta, risultato);
+        }
+
+        private void eseguiPHP(NetworkStream cornetta) 
+        {
+            string pagina = chiedi(cornetta, "Quale pagina?");
+            string pathPagina = Path.Combine(txtPath.Text, pagina + ".txt"); //possimao selezionare solo file .txt
+            Process interprete = new Process();
+            interprete.StartInfo.FileName = @"c:\xampp\php\php.exe";
+            interprete.StartInfo.Arguments = pathPagina;
+            interprete.StartInfo.RedirectStandardOutput = true;
+            interprete.Start();
+            string paginaDinamica = interprete.StandardOutput.ReadToEnd();
+            invia(cornetta, paginaDinamica);
         }
     }
 }
