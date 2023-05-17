@@ -61,6 +61,7 @@ namespace WebServer
                 List<string> listaFile = Directory.EnumerateFiles(txtPath.Text).ToList();
                 string elenco = String.Join("\r\n", listaFile);
                 cornetta.Write(Encoding.UTF8.GetBytes(elenco));
+                cornetta.Close();
             }
             else if (File.Exists(percorsoFile))
             {
@@ -75,11 +76,13 @@ namespace WebServer
 
                 string testoElaborato = interpretePHP.StandardOutput.ReadToEnd();
                 cornetta.Write(Encoding.UTF8.GetBytes(testoElaborato));
+                cornetta.Close();
             }
             else
             {
                 string messaggio = "File non esistente!";
                 cornetta.Write(Encoding.UTF8.GetBytes(messaggio));
+                cornetta.Close();
             }
         }
     }
