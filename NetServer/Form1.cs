@@ -42,7 +42,7 @@ namespace NetServer
             do
             {
                 
-                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, esegui, php, orario)\n\r");
+                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, esegui, orario)\n\r");
 
                 comando = ascolta(cornetta);
                 switch (comando)
@@ -198,7 +198,7 @@ namespace NetServer
         private void eseguiPHP(NetworkStream cornetta, string pagina) 
         {
             //string pagina = chiedi(cornetta, "Quale pagina?");
-            string pathPagina = Path.Combine(txtPath.Text, pagina + ".txt"); //possimao selezionare solo file .txt
+            string pathPagina = Path.Combine(txtPath.Text, pagina + ".txt"); //possiamo selezionare solo file .txt
             Process interprete = new Process();
             interprete.StartInfo.FileName = @"c:\xampp\php\php.exe";
             interprete.StartInfo.Arguments = pathPagina;
@@ -213,13 +213,9 @@ namespace NetServer
             string programma = chiedi(cornetta, "Comando da eseguire:\n\r");
             string parametri = chiedi(cornetta, "Con quali parametri?\n\r");
             if(programma == "php")
-            {
                 eseguiPHP(cornetta, parametri);
-            }
             else
-            {
                 eseguiExe(cornetta, programma, parametri);
-            }
         }
     }
 }
