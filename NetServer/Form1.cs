@@ -94,9 +94,9 @@ namespace NetServer
                         esegui(cornetta);
                         break;
 
-                    case "php":
-                        eseguiPHP(cornetta);
-                        break;
+                    //case "php":
+                    //    eseguiPHP(cornetta);
+                    //    break;
 
                     case "orario":
                         invia(cornetta, DateTime.Now.ToShortTimeString());
@@ -177,10 +177,10 @@ namespace NetServer
             return ascolta(cornetta);
         }
 
-        private void esegui(NetworkStream cornetta)
+        private void eseguiExe(NetworkStream cornetta, string programma, string parametri)
         {
-            string programma = chiedi(cornetta, "Comando da eseguire:\n\r");
-            string parametri = chiedi(cornetta, "Con quali parametri?\n\r");
+            //string programma = chiedi(cornetta, "Comando da eseguire:\n\r");
+            //string parametri = chiedi(cornetta, "Con quali parametri?\n\r");
             Process cmd = new Process();
             cmd.StartInfo.FileName = programma; //specifico il programma da eseguire
             cmd.StartInfo.Arguments = parametri; //specifico i parametri
@@ -199,9 +199,9 @@ namespace NetServer
             invia(cornetta, risultato);
         }
 
-        private void eseguiPHP(NetworkStream cornetta) 
+        private void eseguiPHP(NetworkStream cornetta, string pagina) 
         {
-            string pagina = chiedi(cornetta, "Quale pagina?");
+            //string pagina = chiedi(cornetta, "Quale pagina?");
             string pathPagina = Path.Combine(txtPath.Text, pagina + ".txt"); //possimao selezionare solo file .txt
             Process interprete = new Process();
             interprete.StartInfo.FileName = @"c:\xampp\php\php.exe";
@@ -210,6 +210,20 @@ namespace NetServer
             interprete.Start();
             string paginaDinamica = interprete.StandardOutput.ReadToEnd();
             invia(cornetta, paginaDinamica);
+        }
+
+        private void esegui(NetworkStream cornetta) //deve ricevere nome programma e attributi e lo esegue
+        {
+            string programma = chiedi(cornetta, "Comando da eseguire:\n\r");
+            string parametri = chiedi(cornetta, "Con quali parametri?\n\r");
+            if(programma == "php")
+            {
+                eseguiPHP(cornetta, parametri);
+            }
+            else
+            {
+                eseguiExe(cornetta, programma, parametri);
+            }
         }
     }
 }
