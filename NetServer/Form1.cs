@@ -94,10 +94,6 @@ namespace NetServer
                         esegui(cornetta);
                         break;
 
-                    //case "php":
-                    //    eseguiPHP(cornetta);
-                    //    break;
-
                     case "orario":
                         invia(cornetta, DateTime.Now.ToShortTimeString());
                         break;
