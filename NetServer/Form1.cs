@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -33,36 +34,37 @@ namespace NetServer
             lstRichieste.Items.Add("Richiesta in ingresso!");
             //prendiamo il ricevitore per parlare e ascoltare
             NetworkStream cornetta = linea.GetStream(); //prendo il NetworkStream del TcpClient 
+            invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\r");
 
             string comando;
             do
             {
-                invia(cornetta, "\n\rTxtServer V1.0.0\n\rBenvenuto!\n\rComandi(carica, crea, elimina, visualizza, orario)\n\r");
-                invia(cornetta, "Scrivi un comando:\n\r");
+                
+                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, orario)\n\r");
 
                 comando = ascolta(cornetta);
                 switch (comando)
                 {
                     case "carica":
-                        invia(cornetta, "Quale file vuoi caricare?");
+                        invia(cornetta, "Quale file vuoi caricare?\n\r");
                         string file = ascolta(cornetta);
                         caricaFile(cornetta, file);
                         break;
 
                     case "crea":
-                        invia(cornetta, "Inserisci il nome del file da creare:");
+                        invia(cornetta, "Inserisci il nome del file da creare:\n\r");
                         string daCreare = ascolta(cornetta);
-                        invia(cornetta, "Inserisci il testo del file:");
+                        invia(cornetta, "Inserisci il testo del file:\n\r");
                         string testo = ascolta(cornetta);
                         creaFile(daCreare, testo);
-                        invia(cornetta, "File creato!");
+                        invia(cornetta, "File creato!\n\r");
                         break;
 
                     case "elimina":
-                        invia(cornetta, "Inserisci il nome del file da eliminare:");
+                        invia(cornetta, "Inserisci il nome del file da eliminare:\n\r");
                         string daEliminare = ascolta(cornetta);
                         eliminaFile(daEliminare);
-                        invia(cornetta, "File eliminato!");
+                        invia(cornetta, "File eliminato!\n\r");
                         break;
 
                     case "visualizza":
@@ -77,11 +79,11 @@ namespace NetServer
                         {
                             string[] files = Directory.EnumerateFiles(txtPath.Text).ToArray();
                             string listaFile = String.Join("\r\n ", files);
-                            invia(cornetta, listaFile);
+                            invia(cornetta, $"{listaFile}\n\r");
                         }
                         else
                         {
-                            invia(cornetta, "Nessun file presente!");
+                            invia(cornetta, "Nessun file presente!\n\r");
                         }
 
                         break;
@@ -91,7 +93,7 @@ namespace NetServer
                         break;
 
                     default:
-                        invia(cornetta, "Comando non riconosciuto!");
+                        invia(cornetta, "Comando non riconosciuto!\n\r");
                         break;
                 }
 
@@ -131,7 +133,7 @@ namespace NetServer
             }
             else
             {
-                invia(cornetta, "Il file non esiste!");
+                invia(cornetta, "Il file non esiste!\n\r");
             }
         }
 
