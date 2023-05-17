@@ -1,3 +1,5 @@
+using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -21,8 +23,8 @@ namespace NetServer
 
         private void btnAvvia_Click(object sender, EventArgs e)
         {
-            string command = $"/C telnet localhost {numPorta.Value}";
-            System.Diagnostics.Process.Start("CMD.exe", command);
+            string command = $"/C telnet 127.0.0.1 {numPorta.Value}";
+            Process.Start("CMD.exe", command);
             btnCartella.Enabled = false;
             numPorta.Enabled = false;
             //costruisco il telefono
@@ -40,7 +42,7 @@ namespace NetServer
             do
             {
                 
-                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, orario)\n\r");
+                invia(cornetta, "\n\rScrivi un comando:(carica, crea, elimina, visualizza, esegui, orario)\n\r");
 
                 comando = ascolta(cornetta);
                 switch (comando)
@@ -88,6 +90,10 @@ namespace NetServer
 
                         break;
 
+                    case "esegui":
+                        esegui(cornetta);
+                        break;
+
                     case "orario":
                         invia(cornetta, DateTime.Now.ToShortTimeString());
                         break;
@@ -114,7 +120,10 @@ namespace NetServer
             {
                 singolo = cornetta.ReadByte();
                 if (singolo > -1 && singolo != 13 && singolo != 10 && singolo != 8)
-                    buffer.Add((byte)singolo);
+                    if(singolo == 8) //se ho premuto backspace elimino l'ultimo carattere
+                        buffer.RemoveAt(buffer.Count - 1);
+                    else
+                        buffer.Add((byte)singolo);
             } while (singolo > -1 && singolo != 13);
             string risposta = Encoding.ASCII.GetString(buffer.ToArray());
             return risposta;
@@ -156,6 +165,21 @@ namespace NetServer
         {
             byte[] messaggio = Encoding.ASCII.GetBytes(domanda);//codifico il messaggio in ASCII
             cornetta.Write(messaggio);//scrivo il messaggio sul NetworKStream
+        }
+
+        private void esegui(NetworkStream cornetta)
+        {
+            invia(cornetta, "Comando da eseguire:\n\r");
+            string programma = ascolta(cornetta);
+            invia(cornetta, "Con quali parametri?\n\r");
+            string parametri = ascolta(cornetta);
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = programma; //specifico il programma da eseguire
+            cmd.StartInfo.Arguments = parametri; //specifico i parametri
+            cmd.StartInfo.RedirectStandardOutput = true; //ridirezione l'output sullo standard output
+            cmd.Start();
+            string risultato = cmd.StandardOutput.ReadToEnd(); //leggo l'output dell'applicazione
+            invia(cornetta, risultato);
         }
     }
 }
