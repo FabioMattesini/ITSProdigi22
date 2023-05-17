@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 
@@ -29,10 +30,7 @@ namespace WebServer
             do
             {
                 richiesta = server.GetContext(); //aspetto una richiesta
-                //string messaggio = $"sito in costruzione: {richiesta.Request.RawUrl}";
-                //byte[] pachetto = Encoding.UTF8.GetBytes(messaggio);
                 Stream cornetta = richiesta.Response.OutputStream;
-                //cornetta.Write(pachetto); //scrivo un messaggio sullo stream di output
                 caricaPagina(richiesta.Request.RawUrl, cornetta);
 
                 richiesta.Response.OutputStream.Close();
@@ -51,7 +49,6 @@ namespace WebServer
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            richiesta.Response.OutputStream.Close();
             server.Close();
         }
 
@@ -61,8 +58,17 @@ namespace WebServer
             string percorsoFile = Path.Combine(txtPath.Text, file);
             if(File.Exists(percorsoFile))
             {
-                byte[] contenuto = File.ReadAllBytes(percorsoFile);
-                cornetta.Write(contenuto);
+                //byte[] contenuto = File.ReadAllBytes(percorsoFile);
+                //cornetta.Write(contenuto);
+                Process interpretePHP = new Process();
+                interpretePHP.StartInfo.FileName = @"c:\xampp\php\php.exe"; //la @ serve per intepretare correttamente gli slash
+                interpretePHP.StartInfo.Arguments = percorsoFile;
+                interpretePHP.StartInfo.RedirectStandardOutput = true;
+                interpretePHP.StartInfo.CreateNoWindow = true;
+                interpretePHP.Start();
+
+                string testoElaborato = interpretePHP.StandardOutput.ReadToEnd();
+                cornetta.Write(Encoding.UTF8.GetBytes(testoElaborato));
             }
             else
             {
