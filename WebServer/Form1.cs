@@ -7,7 +7,7 @@ namespace WebServer
     public partial class Form1 : Form
     {
         HttpListener server;
-        HttpListenerContext richiesta;
+        //HttpListenerContext richiesta;
         bool isAttivato;
         public Form1()
         {
@@ -17,7 +17,7 @@ namespace WebServer
             //3) capire quale pagina è richiesta
             //4) se presente spedirla
             //5) rimetteri in attesa della prossima chiamata
-            //6) opzionale: permettre l'uso di pagina php
+            //6) opzionale: permettere l'uso di pagina php
         }
 
         private void btnAvvia_Click(object sender, EventArgs e)
@@ -29,13 +29,13 @@ namespace WebServer
 
             do
             {
-                richiesta = server.GetContext(); //aspetto una richiesta
+                HttpListenerContext richiesta = server.GetContext(); //aspetto una richiesta
                 Stream cornetta = richiesta.Response.OutputStream;
                 caricaPagina(richiesta.Request.RawUrl, cornetta);
 
                 richiesta.Response.OutputStream.Close();
             } while (isAttivato);
-            
+
             server.Close();
         }
 
@@ -56,7 +56,13 @@ namespace WebServer
         {
             string file = url.Replace("/", "");
             string percorsoFile = Path.Combine(txtPath.Text, file);
-            if(File.Exists(percorsoFile))
+            if (url == "/")
+            {
+                List<string> listaFile = Directory.EnumerateFiles(txtPath.Text).ToList();
+                string elenco = String.Join("\r\n", listaFile);
+                cornetta.Write(Encoding.UTF8.GetBytes(elenco));
+            }
+            else if (File.Exists(percorsoFile))
             {
                 //byte[] contenuto = File.ReadAllBytes(percorsoFile);
                 //cornetta.Write(contenuto);
