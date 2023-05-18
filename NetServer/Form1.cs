@@ -28,7 +28,8 @@ namespace NetServer
             btnCartella.Enabled = false;
             numPorta.Enabled = false;
             //costruisco il telefono
-            TcpListener telefono = new TcpListener((int)numPorta.Value); //creo un listener sulla porta 80
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            TcpListener telefono = new TcpListener(localAddr ,(int)numPorta.Value); //creo un listener sulla porta 80
             //lo attacco al muro
             telefono.Start(); //avvio il listener 
             //mi metto in ascolto finchè qualcuno non si connette
