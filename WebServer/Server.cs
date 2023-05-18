@@ -24,8 +24,8 @@ namespace WebServer
             attivo = true;
             while(attivo)
             {
-                var chiamata = server.GetContext(); //ogni volta che ricevo una richiesta invoco il metodo di ricevutaChiamata
-                ricevutaChiamata.Invoke(this, chiamata);
+                HttpListenerContext chiamata = server.GetContext(); //ogni volta che ricevo una richiesta invoco il metodo di ricevutaChiamata
+                ricevutaChiamata.Invoke(this, chiamata); //chiama tutti gli oggetti che si sono iscritti all'EventHandler
             }
         }
     }

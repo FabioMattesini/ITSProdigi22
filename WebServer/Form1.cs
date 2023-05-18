@@ -8,7 +8,6 @@ namespace WebServer
     {
         HttpListener server;
         //HttpListenerContext richiesta;
-        bool isAttivato;
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +21,6 @@ namespace WebServer
 
         private void btnAvvia_Click(object sender, EventArgs e)
         {
-            isAttivato = true;
             server = new HttpListener();
             server.Prefixes.Add("http://127.0.0.1:8080/");
             server.Start();
@@ -58,6 +56,7 @@ namespace WebServer
         private void caricaPagina(string url, Stream cornetta)
         {
             string nomeFile = url.Replace(txtPath.Text, "");
+            byte[] pacchetto = null;
             if (nomeFile == "")
             {
                 List<string> listaFile = Directory.EnumerateFiles(txtPath.Text).ToList();
@@ -67,6 +66,7 @@ namespace WebServer
             }
             else if (File.Exists(url))
             {
+                string risposta;
                 if (url.EndsWith(".php"))
                 {
                     Process interpretePHP = new Process();
@@ -77,22 +77,20 @@ namespace WebServer
                     interpretePHP.Start();
 
                     string testoElaborato = interpretePHP.StandardOutput.ReadToEnd();
-                    cornetta.Write(Encoding.UTF8.GetBytes(testoElaborato));
+                    pacchetto = Encoding.UTF8.GetBytes(testoElaborato);
                 }
                 else
                 {
-                    byte[] contenuto = File.ReadAllBytes(url);
-                    cornetta.Write(contenuto);
+                    pacchetto = File.ReadAllBytes(url);
                 }
-
-                cornetta.Close();
             }
             else
             {
                 string messaggio = "File non esistente!";
-                cornetta.Write(Encoding.UTF8.GetBytes(messaggio));
-                cornetta.Close();
+                pacchetto = Encoding.UTF8.GetBytes(messaggio);
             }
+            cornetta.Write(pacchetto);
+            cornetta.Close();
         }
     }
 }
