@@ -31,8 +31,10 @@ namespace WebServer
             {
                 HttpListenerContext richiesta = server.GetContext(); //aspetto una richiesta
                 Stream cornetta = richiesta.Response.OutputStream;
-
-                caricaPagina(richiesta.Request.RawUrl, cornetta);
+                string fileRichiesto = richiesta.Request.RawUrl.Substring(1); //substring(1) prende la stringa partendo dalla posizione 1 per rimuovere lo / in testa
+                fileRichiesto = Path.Combine(txtPath.Text, fileRichiesto);
+                lstRichieste.Items.Add(richiesta.Request.UserHostAddress + "\t" + fileRichiesto);
+                caricaPagina(fileRichiesto, cornetta);
 
                 richiesta.Response.OutputStream.Close();
             } while (server.IsListening);
@@ -55,22 +57,21 @@ namespace WebServer
 
         private void caricaPagina(string url, Stream cornetta)
         {
-            string file = url.Replace("/", "");
-            string percorsoFile = Path.Combine(txtPath.Text, file);
-            if (url == "/")
+            string nomeFile = url.Replace(txtPath.Text, "");
+            if (nomeFile == "")
             {
                 List<string> listaFile = Directory.EnumerateFiles(txtPath.Text).ToList();
                 string elenco = String.Join("\r\n", listaFile);
                 cornetta.Write(Encoding.UTF8.GetBytes(elenco));
                 cornetta.Close();
             }
-            else if (File.Exists(percorsoFile))
+            else if (File.Exists(url))
             {
-                if (percorsoFile.EndsWith(".php"))
+                if (url.EndsWith(".php"))
                 {
                     Process interpretePHP = new Process();
                     interpretePHP.StartInfo.FileName = @"c:\xampp\php\php.exe"; //la @ serve per intepretare correttamente gli slash
-                    interpretePHP.StartInfo.Arguments = percorsoFile;
+                    interpretePHP.StartInfo.Arguments = url;
                     interpretePHP.StartInfo.RedirectStandardOutput = true;
                     interpretePHP.StartInfo.CreateNoWindow = true;
                     interpretePHP.Start();
@@ -80,7 +81,7 @@ namespace WebServer
                 }
                 else
                 {
-                    byte[] contenuto = File.ReadAllBytes(percorsoFile);
+                    byte[] contenuto = File.ReadAllBytes(url);
                     cornetta.Write(contenuto);
                 }
 
