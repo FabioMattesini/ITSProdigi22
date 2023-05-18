@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailScavenger", "EmailScav
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetServer", "NetServer\NetServer.csproj", "{FF6DE885-04ED-4C5A-BC8C-740BE332955E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer", "WebServer\WebServer.csproj", "{AF9A815D-DAAE-47B8-8EE2-94CAEE7D14E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServer", "WebServer\WebServer.csproj", "{AF9A815D-DAAE-47B8-8EE2-94CAEE7D14E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{075F0B49-D902-40B5-896A-7BC6D477A6C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{AF9A815D-DAAE-47B8-8EE2-94CAEE7D14E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF9A815D-DAAE-47B8-8EE2-94CAEE7D14E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF9A815D-DAAE-47B8-8EE2-94CAEE7D14E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{075F0B49-D902-40B5-896A-7BC6D477A6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{075F0B49-D902-40B5-896A-7BC6D477A6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{075F0B49-D902-40B5-896A-7BC6D477A6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{075F0B49-D902-40B5-896A-7BC6D477A6C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
