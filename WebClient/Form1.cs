@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace WebClient
 {
     public partial class Form1 : Form
@@ -21,22 +23,26 @@ namespace WebClient
             if(risposta.IsSuccessStatusCode)
             {
                 string testo = await risposta.Content.ReadAsStringAsync();
-                //REGEX ???
-                string[] parole = testo.Split(" "); //???
+                string pattern = @"\w+";
+                testo = Regex.Replace(testo, @"<[^>]*>", ""); //rimuove i tag html
+                //string[] parole = testo.Split();
+                MatchCollection parole = Regex.Matches(testo, pattern);
+
                 /*
                  * ["casa","gatto","cane","boh","nonso","cellulare"]
                  * ["immobile","felix felix","lupus","incertezza","grave incertezza","apparecchio radio"]
                 */
+
                 Dictionary<string, int> archivio = new();
-                foreach (string parola in parole) //se non ho mai trovato la parola la aggiungo, altrimenti incremento il suo contatore
+                foreach (Match parola in parole) //se non ho mai trovato la parola la aggiungo, altrimenti incremento il suo contatore
                 {
-                    if (archivio.ContainsKey(parola))
+                    if (archivio.ContainsKey(parola.Value))
                     {
-                        archivio[parola]++;
+                        archivio[parola.Value]++;
                     }
                     else
                     {
-                        archivio.Add(parola, 1);
+                        archivio.Add(parola.Value, 1);
                     }
                 }
 
