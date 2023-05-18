@@ -25,6 +25,7 @@ namespace WebClient
                 string testo = await risposta.Content.ReadAsStringAsync();
                 string pattern = @"\w+";
                 testo = Regex.Replace(testo, @"<[^>]*>", ""); //rimuove i tag html
+                //@"<script>.*<\/script>"; rimozione script
                 //string[] parole = testo.Split();
                 MatchCollection parole = Regex.Matches(testo, pattern);
 
