@@ -25,14 +25,10 @@ namespace WebClient
                 string testo = await risposta.Content.ReadAsStringAsync();
                 string pattern = @"\w+";
                 testo = Regex.Replace(testo, @"<[^>]*>", ""); //rimuove i tag html
-                //@"<script>.*<\/script>"; rimozione script
-                //string[] parole = testo.Split();
+                testo = Regex.Replace(testo, @"<script>.*<\/script>", ""); //rimuove gli script javascript
+                testo = Regex.Replace(testo, @"{[^}]*}", ""); //rimuove tutti gli elementi chiusi tra graffe e le graffe
+                testo = Regex.Replace(testo, @".*}", ""); //rimuove tuttw le serie di caratteri che terminano con graffes
                 MatchCollection parole = Regex.Matches(testo, pattern);
-
-                /*
-                 * ["casa","gatto","cane","boh","nonso","cellulare"]
-                 * ["immobile","felix felix","lupus","incertezza","grave incertezza","apparecchio radio"]
-                */
 
                 Dictionary<string, int> archivio = new();
                 foreach (Match parola in parole) //se non ho mai trovato la parola la aggiungo, altrimenti incremento il suo contatore
