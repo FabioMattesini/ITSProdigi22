@@ -27,7 +27,7 @@ namespace WebClient
                 testo = Regex.Replace(testo, @"<[^>]*>", ""); //rimuove i tag html
                 testo = Regex.Replace(testo, @"<script>.*<\/script>", ""); //rimuove gli script javascript
                 testo = Regex.Replace(testo, @"{[^}]*}", ""); //rimuove tutti gli elementi chiusi tra graffe e le graffe
-                testo = Regex.Replace(testo, @".*}", ""); //rimuove tuttw le serie di caratteri che terminano con graffes
+                testo = Regex.Replace(testo, @".*}", ""); //rimuove tutte le serie di caratteri che terminano con graffes
                 MatchCollection parole = Regex.Matches(testo, pattern);
 
                 Dictionary<string, int> archivio = new();
