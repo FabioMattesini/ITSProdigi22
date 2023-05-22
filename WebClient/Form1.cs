@@ -23,7 +23,6 @@ namespace WebClient
             if(risposta.IsSuccessStatusCode)
             {
                 string testo = await risposta.Content.ReadAsStringAsync();
-                
                 string pattern = @"\w+"; //prende solo le parole intere
                 testo = Regex.Replace(testo, @"<script[^>]*>[^<]*<\/script>", "", RegexOptions.Singleline); //rimuove gli script javascript che contengono anche altri parametri dopo la prima scritta script
                 testo = Regex.Replace(testo, @"<[^>]+>", ""); //rimuove i tag html
