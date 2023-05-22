@@ -30,7 +30,7 @@ namespace WebClient
                 testo = Regex.Replace(testo, @"<[^>]+>", ""); //rimuove i tag html
                 
                 testo = testo.ToLower().Trim();
-                List<string> stopwords = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("stopwords-it.json"));
+                List<string> stopwords = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("stopwords-it.json")); //leggo le stopwords da json
                 foreach(string s in stopwords)
                 {
                     testo = Regex.Replace(testo, @"\b"+ s +@"\b", ""); //rimuove le stop words usando le word 
