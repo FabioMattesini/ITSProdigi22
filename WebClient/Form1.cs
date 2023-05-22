@@ -23,11 +23,13 @@ namespace WebClient
             if(risposta.IsSuccessStatusCode)
             {
                 string testo = await risposta.Content.ReadAsStringAsync();
-                string pattern = @"\w+";
-                testo = Regex.Replace(testo, @"<[^>]*>", ""); //rimuove i tag html
-                testo = Regex.Replace(testo, @"<script>.*<\/script>", ""); //rimuove gli script javascript
-                testo = Regex.Replace(testo, @"{[^}]*}", ""); //rimuove tutti gli elementi chiusi tra graffe e le graffe
-                testo = Regex.Replace(testo, @".*}", ""); //rimuove tutte le serie di caratteri che terminano con graffes
+                
+                string pattern = @"\w+"; //prende solo le parole intere
+                testo = Regex.Replace(testo, @"<script[^>]*>[^<]*<\/script>", "", RegexOptions.Singleline); //rimuove gli script javascript che contengono anche altri parametri dopo la prima scritta script
+                testo = Regex.Replace(testo, @"<[^>]+>", ""); //rimuove i tag html
+                testo = testo.ToLower().Trim();
+                //testo = Regex.Replace(testo, @"{[^}]*}", ""); //rimuove tutti gli elementi chiusi tra graffe e le graffe
+                //testo = Regex.Replace(testo, @".*}", ""); //rimuove tutte le serie di caratteri che terminano con graffe
                 MatchCollection parole = Regex.Matches(testo, pattern);
 
                 Dictionary<string, int> archivio = new();
