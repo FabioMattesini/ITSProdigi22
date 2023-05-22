@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
 namespace WebClient
@@ -26,7 +28,14 @@ namespace WebClient
                 string pattern = @"\w+"; //prende solo le parole intere
                 testo = Regex.Replace(testo, @"<script[^>]*>[^<]*<\/script>", "", RegexOptions.Singleline); //rimuove gli script javascript che contengono anche altri parametri dopo la prima scritta script
                 testo = Regex.Replace(testo, @"<[^>]+>", ""); //rimuove i tag html
+                
                 testo = testo.ToLower().Trim();
+                List<string> stopwords = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("stopwords-it.json"));
+                foreach(string s in stopwords)
+                {
+                    testo = Regex.Replace(testo, @"\b"+ s +@"\b", ""); //rimuove le stop words usando le word 
+                }
+
                 //testo = Regex.Replace(testo, @"{[^}]*}", ""); //rimuove tutti gli elementi chiusi tra graffe e le graffe
                 //testo = Regex.Replace(testo, @".*}", ""); //rimuove tutte le serie di caratteri che terminano con graffe
                 MatchCollection parole = Regex.Matches(testo, pattern);
